@@ -1,24 +1,17 @@
 <?php
 include "../base.php";
-$id = $_POST['id'];
-$table = $_POST['table'];
-//echo $table;
-$DB = new DB($table);
-dd($DB->all());
-$data=[];
-$data['id'] = $id;
+$table=$_POST['table'];
+$id=$_POST['id'];
+$data=$$table->find($id);
 if(isset($_FILES['img']['tmp_name'])){
-    //dd($_FILES['img']);
-    $imagename = $_FILES['img']['name'];
-    $imagetmp = $_FILES['img']['tmp_name'];
-    move_uploaded_file($imagetmp,"../img/".$imagename);
-    $data['img']=$imagename;
+    $imgname=$_FILES['img']['name'];
+    $imgtmp=$_FILES['img']['tmp_name'];
+    move_uploaded_file($imgtmp,"../img/".$imgname);
+    $data['img']=$imgname;
 }
 
-dd($data);
 
-$DB->save($data);
+$$table->save($data);
 
-to("../back.php?do=$table");
-
+to("../back.php?do=".$table);
 ?>

@@ -1,31 +1,33 @@
 <?php
 include "../base.php";
+$table = $_POST['table'];
+$dels = ($_POST['del']) ?? "";
+$ids = $_POST['id'];
 
-//編輯和刪除,依據$_POST['id']
-
-if(!empty($_POST['id'])){
-    foreach($_POST['id'] as $idx=>$id){
-        if(isset($_POST['del']) && in_array($id,$_POST['del'])){
-            $menu->del($id);
-        }else{
-            $row=$menu->find($id);
-            $row['text']=$_POST['text'][$idx];
-            $row['href']=$_POST['href'][$idx];
-            $menu->save($row);
-        }
+foreach ($ids as $key => $id) {
+    if (!empty($dels) && in_array($id, $dels)) {
+        $$table->del($id);
+    } else {
+        $data = $$table->find($id);
+                $data['text'] = $_POST['text'][$key];
+                $data['href'] = $_POST['href'][$key];
+                $data['sh'] = 1;
+        //dd($data);
+        $$table->save($data);
     }
 }
 
-//新增資料,依據$_POST['text2']或是$_POST['href2']
 if(isset($_POST['text2'])){
-    foreach($_POST['text2'] as $idx => $text){
-        if($text!=''){
-            $data['text']=$text;
-            $data['href']=$_POST['href2'][$idx];
-            $data['parent']=$_POST['parent'];
-            $menu->save($data);
-        }
+    $data2=[];
+    foreach ($_POST['text2'] as $key => $value) {
+        $data2['text'] = $_POST['text2'][$key];
+        $data2['href'] = $_POST['href2'][$key];
+        $data2['parent'] = $_POST['parent'];
+        $data2['sh'] = 1;
+        //dd($data2);
+        $$table->save($data2);
     }
 }
 
-to("../back.php?do=menu");
+to("../back.php?do=$table");
+?>

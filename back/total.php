@@ -1,18 +1,23 @@
-<?php
-$vist = $$do->find(1);
-//dd($vist);
-?>
-<div class="add_box">
-<h3><?=$str->addmodalheader;?></h3>
-<form action="./api/update.php" method="post">
-    <div>
-        <label for=""><?=$str->addmodaltext;?></label>
-        <input type="text" name="text" value="<?=$vist[$do];?>">
-    </div>
-    <div class="add_btn">
-        <input type="hidden" name="table" value="<?=$do;?>">
-        <input type="submit" value="修改確定">
-        <input type="reset" value="重置">
-    </div>
-</form>
+<div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
+    <p class="t cent botli"><?= $str->header; ?></p>
+    <form method="post" action="./api/update.php">
+        <table width="60%" style="margin: 0 auto;">
+            <tbody>
+                <tr class="yel">
+                    <td width="50%"><?= $str->td; ?></td>
+                    <td width="50%"><input type="text" name="total" value="<?= $sum['total'];?>"></td>
+                </tr>
+                    
+                <input type="hidden" name="table" value="<?=$do;?>">
+            </tbody>
+        </table>
+        <table class="cent" style="margin:40px auto 0; width:70%;">
+            <tbody>
+                <tr>
+                    <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置"></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </form>
 </div>

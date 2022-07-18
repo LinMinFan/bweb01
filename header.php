@@ -1,7 +1,5 @@
 <?php
-$sh = ["sh" => "1"];
-$img = $title->find($sh);
-//dd($img);
+$sh=['sh'=>1];
 ?>
 
-<a title="<?=$img['text'];?>" href="./index.php"><div class="ti" style="background:url(&#39;img/<?=$img['img'];?>&#39;); background-size:cover;"></div><!--標題--></a>
+<div title="<?=$title->find($sh)['text'];?>" class="ti" style="background:url(&#39;./img/<?=$title->find($sh)['img'];?>&#39;); background-size:cover;"></div>

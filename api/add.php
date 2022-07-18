@@ -1,58 +1,45 @@
 <?php
 include "../base.php";
-$table = $_POST['table'];
-echo $table;
-$DB = new DB($table);
-dd($DB->all());
-$data = [];
-if (isset($_FILES['img']['tmp_name'])) {
-    //dd($_FILES['img']);
-    $imagename = $_FILES['img']['name'];
-    $imagetmp = $_FILES['img']['tmp_name'];
-    move_uploaded_file($imagetmp, "../img/" . $imagename);
-    $data['img'] = $imagename;
+$table=$_POST['table'];
+$data=[];
+if(isset($_FILES['img']['tmp_name'])){
+    $imgname=$_FILES['img']['name'];
+    $imgtmp=$_FILES['img']['tmp_name'];
+    move_uploaded_file($imgtmp,"../img/".$imgname);
+    $data['img']=$imgname;
 }
 
 switch ($table) {
     case 'title':
+        $data['text']=($_POST['text'])??"";
+        $data['sh']=0;
+        break;
     case 'ad':
-        $text = ($_POST['text']) ? ($_POST['text']) : "";
-        $data['text'] = $text;
-        $data['sh'] = 0;
-        dd($data);
+    case 'news':
+        $data['text']=($_POST['text'])??"";
+        $data['sh']=1;
         break;
     case 'mvim':
     case 'image':
-        $data['sh'] = 1;
-        dd($data);
-        break;
-    case 'news':
-        $text = ($_POST['text']) ? ($_POST['text']) : "";
-        $data['text'] = $text;
-        $data['sh'] = 1;
-        dd($data);
+        $data['sh']=1;
         break;
     case 'admin':
-        $acc = ($_POST['acc']) ? ($_POST['acc']) : "";
-        $pw = ($_POST['pw']) ? ($_POST['pw']) : "";
-        $data['acc'] = $acc;
-        $data['pw'] = $pw;
-        dd($data);
+        $data['acc']=($_POST['acc'])??"";
+        $data['pw']=($_POST['pw'])??"";
         break;
     case 'menu':
-        $text = ($_POST['text']) ? ($_POST['text']) : "";
-        $href = ($_POST['href']) ? ($_POST['href']) : "";
-        $data['sh'] = 1;
-        $data['text'] = $text;
-        $data['href'] = $href;
-        dd($data);
+        $data['text']=($_POST['text'])??"";
+        $data['href']=($_POST['href'])??"";
+        $data['parent']=0;
+        $data['sh']=1;
         break;
-
-    default:
+        default:
         # code...
         break;
 }
 
-$DB->save($data);
+$$table->save($data);
 
-to("../back.php?do=$table");
+$url="../back.php?do=".$table;
+to($url);
+?>

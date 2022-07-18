@@ -1,17 +1,21 @@
 <?php
 include "../base.php";
-$chk = $admin->math('count','id',['acc'=>$_POST['acc'],'pw'=>$_POST['pw']]);
 
-if($chk >0 ){
-    $_SESSION['login']=1;
-    to("../back.php");
-}else{
+$acc = $_POST['acc'];
+$pw = $_POST['pw'];
+$adm = $admin->math('count','id',['acc' => $acc, 'pw' => $pw]);
+dd($adm);
+if (empty($adm)) {
 ?>
-<script>
-    alert("帳號密碼錯誤");
-    location.href="../index.php?do=login";
-</script>
-
+    <script>
+        alert('帳號或密碼輸入錯誤');
+        location.href="../index.php?do=login"
+    </script>
 <?php
+} else {
+    $_SESSION['adm'] = $acc;
+    to("../back.php?do=title");
 }
+
+
 ?>

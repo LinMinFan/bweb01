@@ -1,17 +1,11 @@
 <?php
 include "../base.php";
-$text = $_POST['text'];
-$table = $_POST['table'];
-//echo $table;
-$DB = new DB($table);
+$table=$_POST['table'];
+$data=$$table->find(1);
+dd($data);
+$data[$table]=$_POST[$table];
+dd($data);
+$$table->save($data);
 
-$data=[];
-$data['id'] = 1;
-$data[$table] = $text;
-
-
-$DB->save($data);
-
-to("../back.php?do=$table");
-
+to("../back.php?do=".$table);
 ?>

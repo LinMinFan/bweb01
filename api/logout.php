@@ -1,5 +1,6 @@
 <?php
 include "../base.php";
-unset($_SESSION['login']);
-to("../index.php");
+unset($_SESSION['adm']);
+
+    to("../index.php?do=login");
 ?>
