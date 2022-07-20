@@ -1,41 +1,42 @@
 <?php
-$do = ($_GET['do']);
-$id = ($_GET['id']);
+$do = ($_GET['do']) ?? 'title';
+$id =$_GET['id'];
 include "../base.php";
-$str = new Str($do);
+$str=new Str($do);
 ?>
-
-<h3 class="cent"><?= $str->updhdr; ?></h3>
+<h3 class="cent"><?=$str->uphdr;?></h3>
 <hr>
-<form action="./api/edit_sub.php" enctype="multipart/form-data" method="POST">
-    <table style="margin: 0 auto;" id="sunmennu">
-        <tr>
-            <td><label for=""><?= $str->updtd[0]; ?></label></td>
-            <td><label for=""><?= $str->updtd[1]; ?></label></td>
-            <td><label for="">刪除</label></td>
-        </tr>
-        <?php
-        $arg=["parent"=>$id];
-        foreach ($$do->all($arg) as $key => $value) {
-        ?>
-            <tr>
-                <td><input type="text" name="text[]" value="<?=$value['text'];?>"></td>
-                <td><input type="text" name="href[]" value="<?=$value['href'];?>"></td>
-                <td><input type="checkbox" name="del[]" value="<?=$value['id'];?>"></td>
-                <input type="hidden" name="id[]" value="<?=$value['id'];?>">
-            </tr>
-        <?php
-        }
-        ?>
-    </table>
-    <input type="hidden" name="table" value="<?= $do; ?>">
-    <input type="hidden" name="parent" value="<?= $id; ?>">
-    <div class="cent">
-        <input type="submit" value="修改確定">
-        <input type="reset" value="重置">
-        <input type="reset" value="更多次選單" onclick="more()">
-    </div>
+<?php
+$titles = $$do->all(['parent'=>$id]);
+?>
+<form action="./api/edit_sub.php?do=<?=$do;?>" method="POST" enctype="multipart/form-data">
+<table id="sunmennu" style="width:60%;margin:0 auto;">
+    <tr class="yel">
+        <td><?=$str->uptd[0];?></td>
+        <td><?=$str->uptd[1];?></td>
+        <td>刪除</td>
+    </tr>
+    <?php
+    foreach ($titles as $key => $value) {
+    ?>
+    <tr>
+        <td><input type="text" name="text[]" value="<?=$value['text'];?>"></td>
+        <td><input type="text" name="href[]" value="<?=$value['href'];?>"></td>
+        <td><input type="checkbox" name="del[]" value="<?=$value['id'];?>"></td>
+    </tr>
+    <input type="hidden" name="id[]" value="<?=$value['id'];?>">
+    <?php
+    }
+    ?>
+    <input type="hidden" name="parent" value="<?=$id;?>">
+</table>
+<div class="cent">
+    <button type="submit">修改確定</button>
+    <button type="reset">重置</button>
+    <input type="button" value="更多次選單" onclick="more()">
+</div>
 </form>
+
 <script>
     function more(){
         let row =`
@@ -48,3 +49,4 @@ $str = new Str($do);
         $('#sunmennu').append(row);
     }
 </script>
+

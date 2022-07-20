@@ -1,9 +1,8 @@
 <?php
-$do=($_GET['do'])??'title';
+$do = ($_GET['do']) ?? 'title';
 include "./base.php";
 $str=new Str($do);
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0068)?do=admin&redo=title -->
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,6 +14,7 @@ $str=new Str($do);
     <link href="./css/css.css" rel="stylesheet" type="text/css">
     <script src="./js/jquery-3.4.1.min.js"></script>
     <script src="./js/js.js"></script>
+
 </head>
 
 <body>
@@ -24,13 +24,11 @@ $str=new Str($do);
             <div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
         </div>
     </div>
+    <iframe style="display:none;" name="back" id="back"></iframe>
     <div id="main">
-        <a title="" href="./index.php">
-            <?php
-            include "./header.php";
-            ?>
-            <!--標題-->
-        </a>
+        <?php
+        include "./header.php";
+        ?>
         <div id="ms">
             <div id="lf" style="float:left;">
                 <div id="menuput" class="dbor">
@@ -77,10 +75,10 @@ $str=new Str($do);
                 </div>
                 <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     <span class="t">進站總人數 :
-                    <?php
-                    $sum=$total->find(1);
-                    echo $sum['total'];
-                    ?>
+                        <?php
+                        $vists = $total->find(1);
+                        echo $vists['total'];
+                        ?>
                     </span>
                 </div>
             </div>
@@ -95,12 +93,13 @@ $str=new Str($do);
                     </tbody>
                 </table>
                 <?php
-                $file="./back/".$do.".php";
-                if(file_exists($file)){
+                $file = "./back/$do.php";
+                if (file_exists($file)) {
                     include $file;
-                }else {
+                } else {
                     include "./back/title.php";
                 }
+
                 ?>
             </div>
             <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
@@ -122,7 +121,7 @@ $str=new Str($do);
         </div>
         <div style="clear:both;"></div>
         <?php
-        include "./footer.php";
+        include "./footer.php"
         ?>
     </div>
 
