@@ -1,5 +1,5 @@
 <?php
-$do = ($_GET['do']) ?? 'main';
+$do = ($_GET['do']) ?? "main";
 include "./base.php";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -23,48 +23,47 @@ include "./base.php";
 		</div>
 	</div>
 	<div id="main">
-		<?php
-		include "./header.php";
-		?>
+		<?php include "./header.php"; ?>
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
 					<?php
-					$mus=$menu->all(['parent'=>0,'sh'=>1]);
-					foreach ($mus as $key => $mu) {
+					$mms = $menu->all(['parent' => 0, 'sh' => 1]);
+					foreach ($mms as $mm) {
 					?>
-                    <div class="mainmu">
-                        <a href="<?=$mu['href'];?>" style="text-decoration:none;"><?=$mu['text'];?></a>
-						<div class="mw" style="display:none;">
-						<?php
-						$subs=$menu->all(['parent' => $mu['id']]);
-						foreach ($subs as $sub) {
-						?>
-						<div class="mainmu2">
-							<a href="<?=$sub['href'];?>" style="text-decoration:none;"><span><?=$sub['text'];?></span></a>
+						<div class="mainmu">
+							<a href="<?= $mm['href']; ?>"><?= $mm['text']; ?></a>
+							<div class="mw" style="display:none;">
+								<?php
+								$sms = $menu->all(['parent' => $mm['id']]);
+								foreach ($sms as $sm) {
+								?>
+									<div class="mainmu2">
+										<a href="<?= $sm['href']; ?>"><?= $sm['text']; ?></a>
+									</div>
+								<?php
+								}
+								?>
+							</div>
 						</div>
-						<?php	
-						}
-						?>
-						</div>
-					</div>
 					<?php
 					}
 					?>
+
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
 						<?php
-						$vists = $total->find(1);
-						echo $vists['total'];
+						$vis = $total->find(1);
+						echo $vis['total'];
 						?>
 					</span>
 				</div>
 			</div>
 			<?php
-			$file = "./front/$do.php";
+			$file = "./front/" . $do . ".php";
 			if (file_exists($file)) {
 				include $file;
 			} else {
@@ -92,32 +91,32 @@ include "./base.php";
 				<!--右邊-->
 				<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
 				<div style="width:89%; height:480px;" class="dbor">
-					<span class="t botli">校園映象區
+					<span class="t botli">校園映象區</span>
+					<div class="cent">
 						<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
-						<?php
-						$igs = $image->all(["sh" => 1]);
-						?>
 						<div>
-							<?php
-							foreach ($igs as $key => $ig) {
-							?>
-								<img id="ssaa<?= $key; ?>" class="im" src="./img/<?= $ig['img']; ?>" width="150px" height="103px">
-							<?php
-							}
-							?>
+						<?php
+						$igcounts=$image->math('count','id',['sh'=>1]);
+						$imgs=$image->all(['sh'=>1]);
+						foreach ($imgs as $key => $img) {
+						?>
+						<div id="ssaa<?=$key;?>" class="im"><img src="./img/<?=$img['img'];?>" width="150px" height="103px"></div>
+						<?php	
+						}
+						?>
 						</div>
 						<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
-					</span>
+					</div>
 					<script>
 						var nowpage = 0,
-							num = <?= $image->math("count", "id", ["sh" => 1]); ?>;
+							num = <?=$igcounts;?>;
 
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
 								nowpage--;
 							}
-							if (x == 2 && (nowpage + 1) <= (num - 3)) {
+							if (x == 2 && (nowpage + 1)  <= num - 3) {
 								nowpage++;
 							}
 							$(".im").hide()
@@ -132,9 +131,7 @@ include "./base.php";
 			</div>
 		</div>
 		<div style="clear:both;"></div>
-		<?php
-		include "./footer.php"
-		?>
+		<?php include "./footer.php"; ?>
 	</div>
 
 </body>

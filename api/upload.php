@@ -1,20 +1,19 @@
 <?php
+$do = $_GET['do'];
+$id = $_GET['id'];
 include "../base.php";
-$table=$_POST['table'];
-$id=$_POST['id'];
 
-$data=$$table->find($id);
-
-if (isset($_FILES['img']['name'])) {
+if(isset($_FILES['img'])){
+    $data=$$do->find($id);
     $name=$_FILES['img']['name'];
-    $tmp_name=$_FILES['img']['tmp_name'];
-    move_uploaded_file($tmp_name,"../img/".$name);
+    $tn=$_FILES['img']['tmp_name'];
+    move_uploaded_file($tn,"../img/".$name);
     $data['img']=$name;
+    $$do->save($data);
 }
 
 
-$$table->save($data);
-$url="../back.php?do=".$table;
-to($url);
+to("../back.php?do=".$do);
+
 
 ?>

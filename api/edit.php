@@ -1,49 +1,48 @@
 <?php
+$do = $_GET['do'];
 include "../base.php";
-$table = $_GET['do'];
-$dels = ($_POST['del'])??"";
-$ids = $_POST['id'];
-$texts = $_POST['text'];
+$ids=$_POST['id'];
 
+if(!empty($_POST['del'])){
+    foreach ($ids as $id) {
+        if (in_array($id,$_POST['del'])) {
+            $$do->del($id);
+        }
+    }
+}else {
+    foreach ($ids as $key => $id) {
+        $data=$$do->find($id);
 
-foreach ($ids as $key => $id) {
-    if (!empty($dels) && in_array($id, $dels)) {
-        
-                $$table->del($id);
-    }else {
-        $data=$$table->find($id);
-        switch ($table) {
+        switch ($do) {
             case 'title':
-                $data['text']=$texts[$key];
-                $data['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+                $data['text']=$_POST['text'][$key];
+                $data['sh']=(in_array($id,$_POST['sh']))?1:0;
                 break;
             case 'ad':
             case 'news':
-                $data['text']=$texts[$key];
-                $data['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+                $data['text']=$_POST['text'][$key];
+                $data['sh']=(in_array($id,$_POST['sh']))?1:0;
                 break;
             case 'mvim':
             case 'image':
-                $data['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+                $data['sh']=(in_array($id,$_POST['sh']))?1:0;
                 break;
             case 'admin':
                 $data['acc']=$_POST['acc'][$key];
                 $data['pw']=$_POST['pw'][$key];
-                break;    
-            case 'menu':
-                $data['text']=$_POST['text'][$key];
-                $data['href']=$_POST['href'][$key];
-                $data['sh']=(isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
-                break;    
-                
-                default:
+                break;
+            
+            default:
                 # code...
                 break;
-            }
-            $$table->save($data);
+        }
+        $$do->save($data);
     }
+
 }
-$url="../back.php?do=".$table;
-to($url);
+
+
+to("../back.php?do=".$do);
+
 
 ?>

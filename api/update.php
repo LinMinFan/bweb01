@@ -1,16 +1,14 @@
 <?php
+$do = $_GET['do'];
 include "../base.php";
-$table = $_GET['do'];
-echo $table;
-$data=$$table->find(1);
-$data[$table]=$_POST[$table];
-dd($data);
 
-$$table->save($data);
+$data=$$do->find(1);
 
+$data[$do]=$_POST[$do];
+           
+$$do->save($data);
 
+to("../back.php?do=".$do);
 
-$url="../back.php?do=".$table;
-to($url);
 
 ?>
