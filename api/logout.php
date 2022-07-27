@@ -1,11 +1,8 @@
 <?php
 include "../base.php";
 
-    unset($_SESSION['acc']);
+unset($_SESSION['login']);
 
-    to("../index.php?do=login");
-
-
-
+to("../index.php?do=login");
 
 ?>

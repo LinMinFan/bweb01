@@ -11,7 +11,7 @@ include "./base.php";
 
 	<title>卓越科技大學校園資訊系統</title>
 	<link href="./css/css.css" rel="stylesheet" type="text/css">
-	<script src="./js/jquery-3.4.1.min.js"></script>
+	<script src="./js/jquery-1.9.1.min.js"></script>
 	<script src="./js/js.js"></script>
 </head>
 
@@ -23,53 +23,50 @@ include "./base.php";
 		</div>
 	</div>
 	<div id="main">
-		<?php include "./header.php"; ?>
+		<?php
+		include "./header.php";
+		?>
 		<div id="ms">
 			<div id="lf" style="float:left;">
 				<div id="menuput" class="dbor">
 					<!--主選單放此-->
 					<span class="t botli">主選單區</span>
 					<?php
-					$mms = $menu->all(['parent' => 0, 'sh' => 1]);
-					foreach ($mms as $mm) {
+					$mms=$menu->all(['sh'=>1,'parent'=>0]);
+					foreach ($mms as $key => $value) {
 					?>
-						<div class="mainmu">
-							<a href="<?= $mm['href']; ?>"><?= $mm['text']; ?></a>
-							<div class="mw" style="display:none;">
-								<?php
-								$sms = $menu->all(['parent' => $mm['id']]);
-								foreach ($sms as $sm) {
-								?>
-									<div class="mainmu2">
-										<a href="<?= $sm['href']; ?>"><?= $sm['text']; ?></a>
-									</div>
-								<?php
-								}
-								?>
-							</div>
-						</div>
+					<div class="mainmu">
+                      <a href="<?=$value['href'];?>"><?=$value['text'];?></a>
+					  <div class="mw" style="display:none;">
+					  <?php
+					 	$subs=$menu->all(['parent'=>$value['id']]);
+						foreach ($subs as  $sub) {
+						?>
+						<div class="mainmu2"><a href="<?=$sub['href'];?>"><?=$sub['text'];?></a></div>
+						<?php	
+						} 
+					  ?>
+					</div>
+					</div>
 					<?php
 					}
 					?>
-
 				</div>
 				<div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
 					<span class="t">進站總人數 :
 						<?php
-						$vis = $total->find(1);
-						echo $vis['total'];
-						?>
-					</span>
+						include "./total.php";
+						?> </span>
 				</div>
 			</div>
 			<?php
+
 			$file = "./front/" . $do . ".php";
 			if (file_exists($file)) {
 				include $file;
 			} else {
 				include "./front/main.php";
 			}
-
 			?>
 			<div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
 			<script>
@@ -94,29 +91,29 @@ include "./base.php";
 					<span class="t botli">校園映象區</span>
 					<div class="cent">
 						<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
-						<div>
 						<?php
-						$igcounts=$image->math('count','id',['sh'=>1]);
-						$imgs=$image->all(['sh'=>1]);
-						foreach ($imgs as $key => $img) {
+						$igs=$image->all(['sh'=>1]);
+						foreach ($igs as $key => $ig) {
 						?>
-						<div id="ssaa<?=$key;?>" class="im"><img src="./img/<?=$img['img'];?>" width="150px" height="103px"></div>
-						<?php	
+						<div><img class="im" id="ssaa<?=$key;?>" src="./img/<?=$ig['img'];?>" width="150px" height="103px"></div>
+						<?php
 						}
 						?>
-						</div>
 						<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
 					</div>
 					<script>
 						var nowpage = 0,
-							num = <?=$igcounts;?>;
+						<?php
+						$countigs=$image->math('count','id',['sh'=>1]);
+						?>
+							num = <?=$countigs;?>;
 
 						function pp(x) {
 							var s, t;
 							if (x == 1 && nowpage - 1 >= 0) {
 								nowpage--;
 							}
-							if (x == 2 && (nowpage + 1)  <= num - 3) {
+							if (x == 2 && (nowpage + 1) <= num - 3) {
 								nowpage++;
 							}
 							$(".im").hide()
@@ -131,7 +128,9 @@ include "./base.php";
 			</div>
 		</div>
 		<div style="clear:both;"></div>
-		<?php include "./footer.php"; ?>
+		<?php
+		include "./footer.php";
+		?>
 	</div>
 
 </body>
