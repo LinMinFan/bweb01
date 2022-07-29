@@ -81,20 +81,27 @@ body
 	background:url(../icon/menu2.fw.png) center no-repeat;
 	background-size:cover;
 }
+
+.mw{
+	position: absolute;
+	top: 20px;
+	left: 100px;
+	height: 30px;
+	width: 190px;
+}
 .mainmu2
 {
-	position:absolute;
-	width: 150px;
-	height: 34px;
-	top: 10px;
-	left: 70px;
+	display: block;
+	width: 190px;
+	height: 30px;
+	position:relative;
 	border-radius:10px;
 	background:url(../icon/menu3.fw.png)center no-repeat;
 	background-size:100% 100%;
 	line-height:30px;
 	padding:2px 10px 2px 10px;
 	margin:7px 1px 7px 1px;
-	z-index: 9;
+	z-index: 10;
 }
 .mainmu2:hover
 {

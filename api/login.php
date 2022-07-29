@@ -1,8 +1,10 @@
 <?php
 include "../base.php";
+
 $chk=$admin->math('count','id',['acc'=>$_POST['acc'],'pw'=>$_POST['pw']]);
 
-if ($chk == 1) {
+if ($chk==1) {
+    $_SESSION['user']=1;
     to("../back.php?do=title");
 }else {
 ?>
@@ -12,4 +14,5 @@ if ($chk == 1) {
 </script>
 <?php
 }
+
 ?>
