@@ -1,7 +1,17 @@
 
+<div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
+    <!--正中央-->
+    <table width="100%">
+        <tbody>
+            <tr>
+                <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
+                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+            </tr>
+        </tbody>
+    </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli"><?=$str->hd;?></p>
-        <form method="post" action="./api/edit.php?do=<?=$do;?>">
+        <form method="post" action="./api/edit.php?do=<?=$do;?>" enctype="multipart/form-data">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
@@ -12,16 +22,16 @@
                         <td></td>
                     </tr>
                     <?php
-                    $tts=$$do->all();
-                    foreach ($tts as  $tt) {
+                    $dataall=$$do->all();
+                    foreach ($dataall as $key => $dt) {
                     ?>
                     <tr>
-                        <td><img src="./img/<?=$tt['img'];?>" width="300px" height="30px"></td>
-                        <td><input type="text" name="text[]" value="<?=$tt['text'];?>"></td>
-                        <td><input type="radio" name="sh[]" value="<?=$tt['id'];?>" <?=($tt['sh']==1)?"checked":"";?>></td>
-                        <td><input type="checkbox" name="del[]" value="<?=$tt['id'];?>"></td>
-                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/upload.php?do=<?=$do;?>&id=<?=$tt['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
-                        <td><input type="hidden" name="id[]" value="<?=$tt['id'];?>"></td>
+                        <td><img src="./img/<?=$dt['img'];?>" width="300px" height="30px"></td>
+                        <td><input type="text" name="text[]" value="<?=$dt['text'];?>"></td>
+                        <td><input type="radio" name="sh[]" value="<?=$dt['id'];?>" <?=($dt['sh']==1)?"checked":"";?>></td>
+                        <td><input type="checkbox" name="del[]" value="<?=$dt['id'];?>"></td>
+                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/upload.php?do=<?=$do;?>&id=<?=$dt['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                        <input type="hidden" name="id[]" value="<?=$dt['id'];?>">
                     </tr>
                     <?php
                     }
@@ -39,3 +49,4 @@
 
         </form>
     </div>
+</div>

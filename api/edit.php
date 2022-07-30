@@ -1,43 +1,40 @@
 <?php
-$do=$_GET['do'];
+$do = $_GET['do'];
 include "../base.php";
-//dd($_FILES['img']);
-$ids=$_POST['id'];
 
 
-if (!empty($_POST['del'])) {
-    foreach ($ids as $id) {
-        if (in_array($id,$_POST['del'])) {
+if (isset($_POST['del'])) {
+    $idx = $_POST['id'];
+    foreach ($idx as $id) {
+        if (in_array($id, $_POST['del'])) {
             $$do->del($id);
         }
     }
-}else {
-    foreach ($ids as $key => $id) {
-        $data=$$do->find($id);
+} else {
+    $idx = $_POST['id'];
+    foreach ($idx as $key => $id) {
+        $data = $$do->find($id);
         switch ($do) {
             case 'title':
-                $data['text']=$_POST['text'][$key];
-                $data['sh']=( isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
-                break;
             case 'ad':
             case 'news':
-                $data['text']=$_POST['text'][$key];
-                $data['sh']=( isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+                $data['text'] = $_POST['text'][$key];
+                $data['sh'] = (in_array($id,$_POST['sh']))?1:0;
                 break;
             case 'mvim':
             case 'image':
-                $data['sh']=( isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+                $data['sh'] = (in_array($id,$_POST['sh']))?1:0;
                 break;
             case 'admin':
-                $data['acc']=$_POST['acc'][$key];
-                $data['pw']=$_POST['pw'][$key];
+                $data['acc'] = $_POST['acc'][$key];
+                $data['pw'] = $_POST['pw'][$key];
                 break;
             case 'menu':
-                $data['text']=$_POST['text'][$key];
-                $data['href']=$_POST['href'][$key];
-                $data['sh']=( isset($_POST['sh']) && in_array($id,$_POST['sh']))?1:0;
+                $data['text'] = $_POST['text'][$key];
+                $data['href'] = $_POST['href'][$key];
+                $data['sh'] = (in_array($id,$_POST['sh']))?1:0;
                 break;
-            
+
             default:
                 # code...
                 break;
@@ -46,7 +43,6 @@ if (!empty($_POST['del'])) {
     }
 }
 
-$url="../back.php?do=$do";
 
-to($url);
-?>
+
+to("../back.php?do=$do");

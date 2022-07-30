@@ -9,17 +9,16 @@
             <div style="width:99%; height:100%; position:relative;" class="cent">沒有資料</div>
         </div>
     </div>
-    
     <script>
         var lin = new Array();
-        <?php
-        $mvs=$mvim->all(['sh'=>1]);
-        foreach ($mvs as $mv) {
-        ?>
-        lin.push("./img/<?=$mv['img'];?>");
-        <?php
-        }
-        ?>
+    <?php
+    $lins=$mvim->all($sh);
+    foreach ($lins as $lin) {
+    ?>
+        lin.push("./img/<?=$lin['img'];?>")
+    <?php
+    }
+    ?>
         var now = 0;
         ww();
         if (lin.length > 1) {
@@ -35,39 +34,30 @@
                 now = 0;
         }
     </script>
-    <?php
-    $p = ($_GET['p']) ?? 1;
-    $div = 5;
-    $countsig = $news->math('count', 'id',$sh);
-    $pages = ceil($countsig / $div);
-    $start = ($p - 1) * $div;
-    $pre = (($p - 1) > 0) ? ($p - 1) : "1";
-    $next = (($p + 1) <= $pages) ? ($p + 1) : $pages;
-    $tts = $news->all($sh," limit " . $start . "," . $div);
-    ?>
     <div style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
         <span class="t botli">最新消息區
-        <?php
-        if ($countsig>5) {
-        ?>
-        <a href="?do=news" class="bl" style="float:right;">More...</a>
-        <?php
-        }
-        ?>
+            <?php
+            $countns=$news->math('count','id',$sh);
+            if ($countns>5) {
+            ?>
+            <a href="?do=news" class="bl" style="float:right;">More...</a>
+            <?php
+            }
+            ?>
         </span>
-        <ol class="ssaa" style="list-style-type:decimal;">
+        <ul class="ssaa" style="list-style-type:decimal;">
         <?php
-                    
-                    foreach ($tts as  $tt) {
-                    ?>
-                    <li>
-                        <?=mb_substr($tt['text'],0,20);?>
-                        <span class="all" style="display:none;"><?=$tt['text'];?></span>
-                    </li>
-                    <?php
-                    }
-                    ?>
-        </ol>
+         $nns=$news->all($sh," limit 5");
+         foreach ($nns as $nn) {
+        ?>
+        <li>
+            <?=mb_substr($nn['text'],0,20);?>
+            <span class="all" style="display:none;"><?=$nn['text'];?></span>
+        </li>
+        <?php
+         }   
+        ?>
+        </ul>
         <div id="altt" style="position: absolute; width: 350px; min-height: 100px; background-color: rgb(255, 255, 204); top: 50px; left: 130px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
         <script>
             $(".ssaa li").hover(

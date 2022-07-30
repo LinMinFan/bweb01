@@ -31,19 +31,19 @@ include "./base.php";
 													<?php
 													$mus=$menu->all(['parent'=>0,'sh'=>1]);
 													foreach ($mus as $mu) {
-														$subs=$menu->all(['parent'=>$mu['id']]);
 													?>
 													<div class="mainmu">
 														<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
-														<?php
-														foreach ($subs as $sub) {
-														?>
-														<div class="mw" style="display:none;">
-														<a class="mainmu2" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
+														<div class="mw">
+															<?php
+															$subs=$menu->all(['parent'=>$mu['id']]);
+															foreach ($subs as $sub) {
+															?>
+															<a class="mainmu2" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
+															<?php
+															}
+															?>
 														</div>
-														<?php
-														}
-														?>
 													</div>
 													<?php
 													}
@@ -51,12 +51,15 @@ include "./base.php";
                                                 </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-                        	<?=$total->find(1)['total'];?>
+                        	<?php
+							$sum=$total->find(1)['total'];
+							echo $sum;
+							?>
 						</span>
                     </div>
         		</div>
                 <?php
-				$file="./front/".$do.".php";
+				$file="./front/$do.php";
 				if (file_exists($file)) {
 					include $file;
 				}else {
@@ -84,33 +87,34 @@ include "./base.php";
                 	<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
                 	<div style="width:89%; height:480px;" class="dbor">
                     	<span class="t botli">校園映象區</span>
-						<div class="cent">
-							<div onclick="pp(1)">
-								<img src="./icon/up.jpg">
+							<div class="cent">
+								<div>
+									<img src="./icon/up.jpg" onclick="pp(1)">
+								</div>
+								<?php
+								$countigs=$image->math('count','id',$sh);
+								$igs=$image->all($sh);
+								foreach ($igs as $key => $ig) {
+								?>
+								<div class="im" id="ssaa<?=$key;?>">
+									<img src="./img/<?=$ig['img'];?>" width="150px" height="103px">
+								</div>
+								<?php
+								}
+								?>
+								<div>
+									<img src="./icon/dn.jpg" onclick="pp(2)">
+								</div>
 							</div>
-							<?php
-							$countsig=$image->math('count','id',['sh'=>1]);
-							$igs=$image->all(['sh'=>1]);
-							foreach ($igs as $key => $ig) {
-							?>
-							<div class="im" id="ssaa<?=$key;?>">
-								<img src="./img/<?=$ig['img'];?>" width="150px" height="103px">
-							</div>
-							<?php
-							}
-							?>
-							<div onclick="pp(2)">
-								<img src="./icon/dn.jpg">
-							</div>
-						</div>
-						                        <script>
-                        	var nowpage=0,num=<?=$countsig;?>;
+
+						    <script>
+                        	var nowpage=0,num=<?=$countigs;?>;
 							function pp(x)
 							{
 								var s,t;
 								if(x==1&&nowpage-1>=0)
 								{nowpage--;}
-								if(x==2&&(nowpage+1) <= num - 3)
+								if(x==2&&(nowpage+1)<=(num-3))
 								{nowpage++;}
 								$(".im").hide()
 								for(s=0;s<=2;s++)
