@@ -1,4 +1,5 @@
 
+
 <div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
     <table width="100%">
@@ -11,7 +12,7 @@
     </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli"><?=$str->hd;?></p>
-        <form method="post" action="./api/edit.php?do=<?=$do;?>" enctype="multipart/form-data">
+        <form method="post" action="./api/edit.php?do=<?=$do;?>">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
@@ -24,20 +25,20 @@
                     </tr>
                     <?php
                     $dataall=$$do->all(['parent'=>0]);
-                    foreach ($dataall as $key => $dt) {
+                    foreach ($dataall as $key => $data) {
                     ?>
                     <tr>
-                        <td><input type="text" name="text[]" value="<?=$dt['text'];?>"></td>
-                        <td><input type="text" name="href[]" value="<?=$dt['href'];?>"></td>
-                        <td><?=$$do->math('count','id',['parent'=>$dt['id']]);?></td>
-                        <td><input type="checkbox" name="sh[]" value="<?=$dt['id'];?>" <?=($dt['sh']==1)?"checked":"";?>></td>
-                        <td><input type="checkbox" name="del[]" value="<?=$dt['id'];?>"></td>
-                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/edit_sub.php?do=<?=$do;?>&id=<?=$dt['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
-                        <input type="hidden" name="id[]" value="<?=$dt['id'];?>">
+                        <td ><input type="text" name="text[]" value="<?=$data['text'];?>" style="width:90%;"></td>
+                        <td ><input type="text" name="href[]" value="<?=$data['href'];?>" style="width:90%;"></td>
+                        <td><?=$$do->math('count','id',['parent'=>$data['id']]);?></td>
+                        <td ><input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>></td>
+                        <td ><input type="checkbox" name="del[]" value="<?=$data['id'];?>"></td>
+                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/edit_sub.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                        <input type="hidden" name="id[]" value="<?=$data['id'];?>">
                     </tr>
                     <?php
                     }
-                    ?>
+                    ?> 
                 </tbody>
             </table>
             <table style="margin-top:40px; width:70%;">

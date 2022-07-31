@@ -1,4 +1,5 @@
 
+
 <div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
     <table width="100%">
@@ -11,13 +12,14 @@
     </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli"><?=$str->hd;?></p>
-        <form method="post" action="./api/update.php?do=<?=$do;?>" enctype="multipart/form-data">
+        <form method="post" action="./api/update.php?do=<?=$do;?>">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
                         <td width="50%"><?=$str->td;?></td>
                         <td><input type="text" name="<?=$do;?>" value="<?=$$do->find(1)[$do];?>"></td>
                     </tr>
+                    
                 </tbody>
             </table>
             <table style="margin-top:40px; width:70%;">

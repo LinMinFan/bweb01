@@ -43,7 +43,7 @@ $str=new str($do);
                             </a>
 							                            <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
                             	<div class="mainmu">
-                    			校園映像資料管理                    			</div>
+                    			校園映象資料管理                    			</div>
                             </a>
 										    <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
                             	<div class="mainmu">
@@ -71,16 +71,15 @@ $str=new str($do);
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
 						<?php
-							$sum=$total->find(1)['total'];
-							echo $sum;
-							?>
+						echo $total->find(1)['total'];
+						?>
 						</span>
                     </div>
         		</div>
                 <?php
 				$file="./back/$do.php";
 				if (file_exists($file)) {
-					include $file;
+					include "$file";
 				}else {
 					include "./back/title.php";
 				}

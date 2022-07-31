@@ -27,41 +27,41 @@ include "./base.php";
              	<div id="lf" style="float:left;">
             		<div id="menuput" class="dbor">
                     <!--主選單放此-->
-                    	                            <span class="t botli">主選單區</span>
-													<?php
-													$mus=$menu->all(['parent'=>0,'sh'=>1]);
-													foreach ($mus as $mu) {
-													?>
-													<div class="mainmu">
-														<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
-														<div class="mw">
-															<?php
-															$subs=$menu->all(['parent'=>$mu['id']]);
-															foreach ($subs as $sub) {
-															?>
-															<a class="mainmu2" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
-															<?php
-															}
-															?>
-														</div>
-													</div>
-													<?php
-													}
-													?>
-                                                </div>
+                    <span class="t botli">主選單區</span>
+					<?php
+					$mms=$menu->all(['parent'=>0,'sh'=>1]);
+					foreach ($mms as $mm) {
+					?>
+					<div class="mainmu">
+						<a href="<?=$mm['href'];?>"><?=$mm['text'];?></a>
+						<?php
+						$subs=$menu->all(['parent'=>$mm['id']]);
+						foreach ($subs as $sub) {
+						?>
+						<div class="mw" style="display:none;">
+						<a class="mainmu2" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
+						</div>
+						<?php
+						}
+						?>
+					</div>
+					<?php
+					}
+
+					?>
+                	</div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-                        	<?php
-							$sum=$total->find(1)['total'];
-							echo $sum;
-							?>
+                        <?php
+						echo $total->find(1)['total'];
+						?>
 						</span>
                     </div>
         		</div>
                 <?php
 				$file="./front/$do.php";
 				if (file_exists($file)) {
-					include $file;
+					include "$file";
 				}else {
 					include "./front/main.php";
 				}
@@ -87,34 +87,27 @@ include "./base.php";
                 	<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
                 	<div style="width:89%; height:480px;" class="dbor">
                     	<span class="t botli">校園映象區</span>
-							<div class="cent">
-								<div>
-									<img src="./icon/up.jpg" onclick="pp(1)">
-								</div>
-								<?php
-								$countigs=$image->math('count','id',$sh);
-								$igs=$image->all($sh);
-								foreach ($igs as $key => $ig) {
-								?>
-								<div class="im" id="ssaa<?=$key;?>">
-									<img src="./img/<?=$ig['img'];?>" width="150px" height="103px">
-								</div>
-								<?php
-								}
-								?>
-								<div>
-									<img src="./icon/dn.jpg" onclick="pp(2)">
-								</div>
-							</div>
-
-						    <script>
+						<div class="cent">
+							<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
+							<?php
+							$countigs=$image->math('count','id',$sh);
+							$imigs=$image->all($sh);
+							foreach ($imigs as $key => $imig) {
+							?>
+							<div class="im" id="ssaa<?=$key;?>"><img src="./img/<?=$imig['img'];?>" width="150px" height="103px"></div>
+							<?php
+							}
+							?>
+							<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
+						</div>
+						<script>
                         	var nowpage=0,num=<?=$countigs;?>;
 							function pp(x)
 							{
 								var s,t;
 								if(x==1&&nowpage-1>=0)
 								{nowpage--;}
-								if(x==2&&(nowpage+1)<=(num-3))
+								if(x==2&&(nowpage+1) <= num-3)
 								{nowpage++;}
 								$(".im").hide()
 								for(s=0;s<=2;s++)

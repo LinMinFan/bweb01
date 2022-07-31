@@ -1,7 +1,5 @@
 <?php
-$sht=$title->find($sh);
-//dd($sht);
+$timg=$title->find($sh);
 ?>
 
-
-<a title="<?=$sht['text'];?>" href="index.php"><div class="ti" style="background:url('./img/<?=$sht['img'];?>'); background-size:cover;"></div><!--標題--></a>
+<a title="<?=$timg['text'];?>" href="./index.php"><div class="ti" style="background:url(&#39;./img/<?=$timg['img'];?>&#39;); background-size:cover;"></div><!--標題--></a>

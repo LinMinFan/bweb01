@@ -9,13 +9,14 @@
             <div style="width:99%; height:100%; position:relative;" class="cent">沒有資料</div>
         </div>
     </div>
+    
     <script>
         var lin = new Array();
-    <?php
-    $lins=$mvim->all($sh);
-    foreach ($lins as $lin) {
+        <?php
+    $mvimgs=$mvim->all($sh);
+    foreach ($mvimgs as  $mvig) {
     ?>
-        lin.push("./img/<?=$lin['img'];?>")
+    lin.push("./img/<?=$mvig['img'];?>");
     <?php
     }
     ?>
@@ -40,22 +41,22 @@
             $countns=$news->math('count','id',$sh);
             if ($countns>5) {
             ?>
-            <a href="?do=news" class="bl" style="float:right;">More...</a>
+            <a class="bl" href="?do=news" style="float:right;">More...</a>
             <?php
             }
             ?>
         </span>
         <ul class="ssaa" style="list-style-type:decimal;">
         <?php
-         $nns=$news->all($sh," limit 5");
-         foreach ($nns as $nn) {
+        $nns=$news->all($sh," limit 5");
+        foreach ($nns as $key => $ns) {
         ?>
         <li>
-            <?=mb_substr($nn['text'],0,20);?>
-            <span class="all" style="display:none;"><?=$nn['text'];?></span>
+            <?=mb_substr($ns['text'],0,20);?>
+            <span class="all" style="display:none;"><?=$ns['text'];?></span>
         </li>
         <?php
-         }   
+        }
         ?>
         </ul>
         <div id="altt" style="position: absolute; width: 350px; min-height: 100px; background-color: rgb(255, 255, 204); top: 50px; left: 130px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>

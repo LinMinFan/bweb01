@@ -81,20 +81,10 @@ body
 	background:url(../icon/menu2.fw.png) center no-repeat;
 	background-size:cover;
 }
-.mainmu,
-.mainmu2,
-a {
-	text-decoration: none;
-} 
-
-.mw{
-
-	display: none;
-}
 .mainmu2
 {
 	position:absolute;
-	width: 193px;
+	width: 190px;
 	height: 30px;
 	top: 20px;
 	left: 100px;
@@ -111,6 +101,11 @@ a {
 	background:url(../icon/menu4.fw.png) center no-repeat;
 	background-size:cover;
 }
+.mainmu a,.mainmu2 {
+	text-decoration: none;
+}
+
+
 #lf
 {
 	height:540px;

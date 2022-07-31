@@ -3,9 +3,9 @@ include "../base.php";
 
 $chk=$admin->math('count','id',['acc'=>$_POST['acc'],'pw'=>$_POST['pw']]);
 
-if ($chk > 0) {
-    $_SESSION['user']=1;
-    to("../back.php");
+if ($chk>=1) {
+    $_SESSION['acc']=1;
+    to("../back/php?do=title");
 }else {
 ?>
 <script>
@@ -14,5 +14,4 @@ if ($chk > 0) {
 </script>
 <?php
 }
-
 ?>
