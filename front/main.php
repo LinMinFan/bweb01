@@ -9,17 +9,16 @@
             <div style="width:99%; height:100%; position:relative;" class="cent">沒有資料</div>
         </div>
     </div>
-    
     <script>
         var lin = new Array();
         <?php
-    $mvimgs=$mvim->all($sh);
-    foreach ($mvimgs as  $mvig) {
-    ?>
-    lin.push("./img/<?=$mvig['img'];?>");
-    <?php
-    }
-    ?>
+        $mms=$mvim->all($sh);
+        foreach ($mms as $mm) {
+        ?>
+        lin.push("./img/<?=$mm['img'];?>");
+        <?php
+        }
+        ?>
         var now = 0;
         ww();
         if (lin.length > 1) {
@@ -38,8 +37,8 @@
     <div style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
         <span class="t botli">最新消息區
             <?php
-            $countns=$news->math('count','id',$sh);
-            if ($countns>5) {
+            $countnn=$news->math('count','id',$sh);
+            if ($countnn>5) {
             ?>
             <a class="bl" href="?do=news" style="float:right;">More...</a>
             <?php
@@ -49,11 +48,11 @@
         <ul class="ssaa" style="list-style-type:decimal;">
         <?php
         $nns=$news->all($sh," limit 5");
-        foreach ($nns as $key => $ns) {
+        foreach ($nns as $nn) {
         ?>
         <li>
-            <?=mb_substr($ns['text'],0,20);?>
-            <span class="all" style="display:none;"><?=$ns['text'];?></span>
+            <span><?=mb_substr($nn['text'],0,20);?></span>
+            <span class="all" style="display:none;"><?=$nn['text'];?></span>
         </li>
         <?php
         }

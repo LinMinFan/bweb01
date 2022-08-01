@@ -2,6 +2,7 @@
 $do=$_GET['do']??"main";
 include "./base.php";
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0040)http://127.0.0.1/test/exercise/collage/? -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -20,41 +21,38 @@ include "./base.php";
     </div>
 </div>
 	<div id="main">
-		<?php
+    	<?php
 		include "./header.php";
 		?>
         	<div id="ms">
              	<div id="lf" style="float:left;">
             		<div id="menuput" class="dbor">
                     <!--主選單放此-->
-                    <span class="t botli">主選單區</span>
-					<?php
-					$mms=$menu->all(['parent'=>0,'sh'=>1]);
-					foreach ($mms as $mm) {
-					?>
-					<div class="mainmu">
-						<a href="<?=$mm['href'];?>"><?=$mm['text'];?></a>
-						<?php
-						$subs=$menu->all(['parent'=>$mm['id']]);
-						foreach ($subs as $sub) {
-						?>
-						<div class="mw" style="display:none;">
-						<a class="mainmu2" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
-						</div>
-						<?php
-						}
-						?>
-					</div>
-					<?php
-					}
-
-					?>
-                	</div>
+                    	                            <span class="t botli">主選單區</span>
+													<?php
+													$mus=$menu->all(['sh'=>1,'parent'=>0]);
+													foreach ($mus as $mu) {
+													?>
+													<div class="mainmu">
+														<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
+														<?php
+														$subs=$menu->all(['parent'=>$mu['id']]);
+														foreach ($subs as $sub) {
+														?>
+														<div class="mainmu2 mw" style="display:none;">
+															<a href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
+														</div>
+														<?php
+														}
+														?>
+													</div>
+													<?php
+													}
+													?>
+                                                </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-                        <?php
-						echo $total->find(1)['total'];
-						?>
+                        	<?=$total->find(1)['total'];?>
 						</span>
                     </div>
         		</div>
@@ -90,24 +88,26 @@ include "./base.php";
 						<div class="cent">
 							<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
 							<?php
-							$countigs=$image->math('count','id',$sh);
-							$imigs=$image->all($sh);
-							foreach ($imigs as $key => $imig) {
+							$igs=$image->all($sh);
+							$countig=$image->math('count','id',$sh);
+							foreach ($igs as $key => $ig) {
 							?>
-							<div class="im" id="ssaa<?=$key;?>"><img src="./img/<?=$imig['img'];?>" width="150px" height="103px"></div>
+							<div class="im" id="ssaa<?=$key;?>">
+							<img src="./img/<?=$ig['img'];?>" width="150px" height="103px">
+							</div>
 							<?php
 							}
 							?>
 							<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
 						</div>
 						<script>
-                        	var nowpage=0,num=<?=$countigs;?>;
+                        	var nowpage=0,num=<?=$countig;?>;
 							function pp(x)
 							{
 								var s,t;
 								if(x==1&&nowpage-1>=0)
 								{nowpage--;}
-								if(x==2&&(nowpage+1) <= num-3)
+								if(x==2&&(nowpage+1)<=num-3)
 								{nowpage++;}
 								$(".im").hide()
 								for(s=0;s<=2;s++)

@@ -43,7 +43,7 @@ $str=new str($do);
                             </a>
 							                            <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
                             	<div class="mainmu">
-                    			校園映象資料管理                    			</div>
+                    			校園映像資料管理                    			</div>
                             </a>
 										    <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
                             	<div class="mainmu">
@@ -70,9 +70,7 @@ $str=new str($do);
 							                    </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-						<?php
-						echo $total->find(1)['total'];
-						?>
+						<?=$total->find(1)['total'];?>
 						</span>
                     </div>
         		</div>

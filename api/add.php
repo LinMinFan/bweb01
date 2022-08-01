@@ -1,6 +1,5 @@
-
 <?php
-$do=$_GET['do'];
+$do = $_GET['do'];
 include "../base.php";
 
 if (isset($_FILES['img'])) {
@@ -39,7 +38,6 @@ if (isset($_FILES['img'])) {
             $data['text']=$_POST['text'];
             $data['href']=$_POST['href'];
             $data['sh']=1;
-            $data['parent']=0;
             break;
         
         default:
@@ -49,4 +47,7 @@ if (isset($_FILES['img'])) {
     $$do->save($data);
 }
 
-to("../back.php?do=".$do);
+
+to("../back.php?do=$do");
+
+?>

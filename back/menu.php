@@ -1,12 +1,10 @@
-
-
 <div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
     <table width="100%">
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button onclick="lo(&#39;./api/logout.php&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
             </tr>
         </tbody>
     </table>
@@ -16,8 +14,8 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="30%"><?=$str->td[0];?></td>
-                        <td width="30%"><?=$str->td[1];?></td>
+                        <td width="35%"><?=$str->td[0];?></td>
+                        <td width="35%"><?=$str->td[1];?></td>
                         <td width="10%"><?=$str->td[2];?></td>
                         <td width="7%">顯示</td>
                         <td width="7%">刪除</td>
@@ -28,8 +26,8 @@
                     foreach ($dataall as $key => $data) {
                     ?>
                     <tr>
-                        <td ><input type="text" name="text[]" value="<?=$data['text'];?>" style="width:90%;"></td>
-                        <td ><input type="text" name="href[]" value="<?=$data['href'];?>" style="width:90%;"></td>
+                        <td ><input type="text" name="text[]" value="<?=$data['text'];?>" style="width:80%;"></td>
+                        <td ><input type="text" name="href[]" value="<?=$data['href'];?>" style="width:80%;"></td>
                         <td><?=$$do->math('count','id',['parent'=>$data['id']]);?></td>
                         <td ><input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>></td>
                         <td ><input type="checkbox" name="del[]" value="<?=$data['id'];?>"></td>
@@ -38,7 +36,7 @@
                     </tr>
                     <?php
                     }
-                    ?> 
+                    ?>
                 </tbody>
             </table>
             <table style="margin-top:40px; width:70%;">

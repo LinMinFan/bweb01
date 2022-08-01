@@ -1,12 +1,10 @@
-
-
 <div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
     <table width="100%">
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button onclick="lo(&#39;./api/logout.php&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
             </tr>
         </tbody>
     </table>
@@ -25,14 +23,14 @@
                     foreach ($dataall as $key => $data) {
                     ?>
                     <tr>
-                        <td ><input type="text" name="acc[]" value="<?=$data['acc'];?>" style="width:90%;"></td>
-                        <td ><input type="password" name="pw[]" value="<?=$data['pw'];?>" style="width:90%;"></td>
+                        <td ><input type="text" name="acc[]" value="<?=$data['acc'];?>" style="width:80%;"></td>
+                        <td ><input type="password" name="pw[]" value="<?=$data['pw'];?>" style="width:80%;"></td>
                         <td ><input type="checkbox" name="del[]" value="<?=$data['id'];?>"></td>
                         <input type="hidden" name="id[]" value="<?=$data['id'];?>">
                     </tr>
                     <?php
                     }
-                    ?> 
+                    ?>
                 </tbody>
             </table>
             <table style="margin-top:40px; width:70%;">
