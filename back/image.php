@@ -14,7 +14,7 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="60%"><?=$str->td;?></td>
+                        <td width="50%"><?=$str->td;?></td>
                         <td width="10%">顯示</td>
                         <td width="10%">刪除</td>
                         <td></td>
@@ -26,7 +26,7 @@
                     $pages=ceil($countnn/$div);
                     $start=($p-1)*$div;
                     $pre=($p-1>0)?($p-1):1;
-                    $next=($p+1<=$pages)?($p+1):$pages;
+                    $next=(($p+1)<=$pages)?($p+1):$pages;
                     $dataall=$$do->all($sh," limit $start,$div");
                     foreach ($dataall as $key => $data) {
                     ?>
@@ -44,14 +44,14 @@
             </table>
             <div style="text-align:center;">
     <a class="bl" href="?do=<?=$do;?>&p=<?=$pre;?>"><</a>
-        <?php
-        for ($i=1; $i <= $pages ; $i++) { 
-        ?>
-        <a class="bl" href="?do=<?=$do;?>&p=<?=$i;?>" <?=($p==$i)?"style='font-size:20px'":'';?>><?=$i;?></a>
-        <?php
-        }
-        ?>
-    <a class="bl" href="?do=<?=$do;?>&p=<?=$next;?>">></a>    
+    <?php
+    for ($i=1; $i <= $pages ; $i++) { 
+    ?>
+    <a class="bl" href="?do=<?=$do;?>&p=<?=$i;?>" <?=($i==$p)?"style='font-size:20px'":"";?>><?=$i;?></a>
+    <?php
+    }
+    ?>
+    <a class="bl" href="?do=<?=$do;?>&p=<?=$next;?>">></a>
     </div>
             <table style="margin-top:40px; width:70%;">
                 <tbody>

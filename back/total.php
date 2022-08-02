@@ -15,7 +15,7 @@
                 <tbody>
                     <tr class="yel">
                         <td width="50%"><?=$str->td;?></td>
-                        <td><input type="text" name="<?=$do;?>" value="<?=$$do->find(1)[$do];?>"></td>
+                        <td ><input type="text" name="<?=$do;?>" value="<?=$$do->find(1)[$do];?>"></td>
                     </tr>
                     
                 </tbody>

@@ -14,8 +14,8 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="35%"><?=$str->td[0];?></td>
-                        <td width="35%"><?=$str->td[1];?></td>
+                        <td width="30%"><?=$str->td[0];?></td>
+                        <td width="30%"><?=$str->td[1];?></td>
                         <td width="10%"><?=$str->td[2];?></td>
                         <td width="7%">顯示</td>
                         <td width="7%">刪除</td>
@@ -28,10 +28,10 @@
                     <tr>
                         <td ><input type="text" name="text[]" value="<?=$data['text'];?>" style="width:80%;"></td>
                         <td ><input type="text" name="href[]" value="<?=$data['href'];?>" style="width:80%;"></td>
-                        <td><?=$$do->math('count','id',['parent'=>$data['id']]);?></td>
+                        <td ><?=$$do->math('count','id',['parent'=>$data['id']]);?></td>
                         <td ><input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>></td>
                         <td ><input type="checkbox" name="del[]" value="<?=$data['id'];?>"></td>
-                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/edit_sub.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/edit_sub.php?do=<?=$do;?>&parent=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
                         <input type="hidden" name="id[]" value="<?=$data['id'];?>">
                     </tr>
                     <?php

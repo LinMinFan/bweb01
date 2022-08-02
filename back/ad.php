@@ -16,7 +16,7 @@
                     <tr class="yel">
                         <td width="80%"><?=$str->td;?></td>
                         <td width="10%">顯示</td>
-                        <td>刪除</td>
+                        <td >刪除</td>
                     </tr>
                     <?php
                     $dataall=$$do->all();

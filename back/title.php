@@ -15,7 +15,7 @@
                 <tbody>
                     <tr class="yel">
                         <td width="45%"><?=$str->td[0];?></td>
-                        <td width="23%"><?=$str->td[1];?></td>
+                        <td width="23%"><?=$str->td[0];?></td>
                         <td width="7%">顯示</td>
                         <td width="7%">刪除</td>
                         <td></td>

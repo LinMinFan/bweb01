@@ -16,40 +16,40 @@ include "./base.php";
 <body>
 <div id="cover" style="display:none; ">
 	<div id="coverr">
-    	<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl(&#39;#cover&#39;)">X</a>
+	<a style="position:absolute; right:3px; top:4px; cursor:pointer; z-index:9999;" onclick="cl(&#39;#cover&#39;)">X</a>
         <div id="cvr" style="position:absolute; width:99%; height:100%; margin:auto; z-index:9898;"></div>
     </div>
 </div>
 	<div id="main">
-    	<?php
+	<?php
 		include "./header.php";
 		?>
         	<div id="ms">
              	<div id="lf" style="float:left;">
             		<div id="menuput" class="dbor">
                     <!--主選單放此-->
-                    	                            <span class="t botli">主選單區</span>
-													<?php
-													$mus=$menu->all(['sh'=>1,'parent'=>0]);
-													foreach ($mus as $mu) {
-													?>
-													<div class="mainmu">
-														<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
-														<?php
-														$subs=$menu->all(['parent'=>$mu['id']]);
-														foreach ($subs as $sub) {
-														?>
-														<div class="mainmu2 mw" style="display:none;">
-															<a href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
-														</div>
-														<?php
-														}
-														?>
-													</div>
-													<?php
-													}
-													?>
-                                                </div>
+                    <span class="t botli">主選單區</span>
+					<?php
+					$mus=$menu->all(['parent'=>0,'sh'=>1]);
+					foreach ($mus as $mu) {
+					?>
+					<div class="mainmu">
+						<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
+						<?php
+						$subs=$menu->all(['parent'=>$mu['id']]);
+						foreach ($subs as $sub) {
+						?>
+						<div class="mainmu2 mw">
+							<a href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
+						</div>
+						<?php
+						}
+						?>
+					</div>
+					<?php
+					}
+					?>
+                    </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
                         	<?=$total->find(1)['total'];?>
@@ -59,7 +59,7 @@ include "./base.php";
                 <?php
 				$file="./front/$do.php";
 				if (file_exists($file)) {
-					include "$file";
+					include $file;
 				}else {
 					include "./front/main.php";
 				}
@@ -87,17 +87,19 @@ include "./base.php";
                     	<span class="t botli">校園映象區</span>
 						<div class="cent">
 							<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
-							<?php
-							$igs=$image->all($sh);
-							$countig=$image->math('count','id',$sh);
-							foreach ($igs as $key => $ig) {
-							?>
-							<div class="im" id="ssaa<?=$key;?>">
-							<img src="./img/<?=$ig['img'];?>" width="150px" height="103px">
-							</div>
-							<?php
-							}
-							?>
+							
+								<?php
+								$countig=$image->math('count','id',$sh);
+								$iis=$image->all($sh);
+								foreach ($iis as $key => $ii) {
+								?>
+								<div class="im" id="ssaa<?=$key;?>">
+								<img src="./img/<?=$ii['img'];?>" width="150px;" height="103px;">
+								</div>
+								<?php
+								}
+								?>
+							
 							<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
 						</div>
 						<script>

@@ -14,7 +14,7 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="60%"><?=$str->td;?></td>
+                        <td width="50%"><?=$str->td;?></td>
                         <td width="10%">顯示</td>
                         <td width="10%">刪除</td>
                         <td></td>

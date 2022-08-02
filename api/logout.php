@@ -1,7 +1,8 @@
 <?php
-session_start();
+include "../base.php";
+
 unset($_SESSION['acc']);
 
-header("location:../index.php?do=login");
+to("../index.php?do=login");
 
 ?>

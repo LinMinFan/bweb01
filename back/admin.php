@@ -14,9 +14,9 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="45%"><?=$str->td[0];?></td>
-                        <td width="45%"><?=$str->td[1];?></td>
-                        <td>刪除</td>
+                        <td width="40%"><?=$str->td[0];?></td>
+                        <td width="40%"><?=$str->td[1];?></td>
+                        <td >刪除</td>
                     </tr>
                     <?php
                     $dataall=$$do->all();
@@ -24,7 +24,7 @@
                     ?>
                     <tr>
                         <td ><input type="text" name="acc[]" value="<?=$data['acc'];?>" style="width:80%;"></td>
-                        <td ><input type="password" name="pw[]" value="<?=$data['pw'];?>" style="width:80%;"></td>
+                        <td ><input type="text" name="pw[]" value="<?=$data['pw'];?>" style="width:80%;"></td>
                         <td ><input type="checkbox" name="del[]" value="<?=$data['id'];?>"></td>
                         <input type="hidden" name="id[]" value="<?=$data['id'];?>">
                     </tr>

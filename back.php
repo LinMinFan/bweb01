@@ -71,13 +71,13 @@ $str=new str($do);
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
 						<?=$total->find(1)['total'];?>
-						</span>
+					</span>
                     </div>
         		</div>
                 <?php
 				$file="./back/$do.php";
 				if (file_exists($file)) {
-					include "$file";
+					include $file;
 				}else {
 					include "./back/title.php";
 				}

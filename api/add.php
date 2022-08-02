@@ -1,8 +1,8 @@
 <?php
-$do = $_GET['do'];
+$do=$_GET['do'];
 include "../base.php";
 
-if (isset($_FILES['img'])) {
+if (!empty($_FILES['img'])) {
     $data=[];
     $name=$_FILES['img']['name'];
     move_uploaded_file($_FILES['img']['tmp_name'],"../img/$name");
@@ -37,6 +37,7 @@ if (isset($_FILES['img'])) {
         case 'menu':
             $data['text']=$_POST['text'];
             $data['href']=$_POST['href'];
+            $data['parent']=0;
             $data['sh']=1;
             break;
         
@@ -45,9 +46,7 @@ if (isset($_FILES['img'])) {
             break;
     }
     $$do->save($data);
+
 }
 
-
 to("../back.php?do=$do");
-
-?>
