@@ -4,35 +4,42 @@
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="lo(&#39;./api/logout.php&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
             </tr>
         </tbody>
     </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli"><?=$str->hd;?></p>
-        <form method="post" action="./api/edit.php?do=<?=$do;?>">
+        <form method="post"  action="./api/edit.php?do=<?=$do;?>">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="50%"><?=$str->td;?></td>
-                        <td width="10%">顯示</td>
-                        <td width="10%">刪除</td>
-                        <td></td>
+                        <td class="w50"><?=$str->td;?></td>
+                        <td class="w10">顯示</td>
+                        <td class="w10">刪除</td>
+                        <td class="w30"></td>
                     </tr>
                     <?php
-                    $dataall=$$do->all();
-                    foreach ($dataall as $key => $data) {
+                        $datas=$$do->all();
+                        foreach ($datas as $key => $data) {
+                            ?>
+                                <tr>
+                                    <td class="cent">
+                                        <img src="./img/<?=$data['img'];?>" width="180px" height="100px">
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox" name="del[]" value="<?=$data['id'];?>">
+                                    </td>
+                                    <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/upload.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                                    <input type="hidden" name="id[]" value="<?=$data['id'];?>">
+                                </tr>
+                            <?php
+                        }
                     ?>
-                    <tr>
-                        <td class="cent"><img src="./img/<?=$data['img'];?>" width="100px" height="80px"></td>
-                        <td ><input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>></td>
-                        <td ><input type="checkbox" name="del[]" value="<?=$data['id'];?>"></td>
-                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/upload.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
-                        <input type="hidden" name="id[]" value="<?=$data['id'];?>">
-                    </tr>
-                    <?php
-                    }
-                    ?>
+
                 </tbody>
             </table>
             <table style="margin-top:40px; width:70%;">

@@ -1,50 +1,62 @@
 <?php
-$do = $_GET['do'];
 include "../base.php";
+$do = $_GET['do'];
+$parent = $_GET['id'];
+$subs = $$do->all(['parent' => $parent]);
 $str = new str($do);
-$parent=$_GET['parent'];
 ?>
-
 <h3 class="cent"><?= $str->ahd; ?></h3>
 <hr>
-<form action="./api/edit_sub.php?do=<?= $do; ?>&parent=<?=$parent;?>" enctype="multipart/form-data" method="POST">
-    <table style="width:60%;margin:0 auto;" id="mytb">
+<div class="w100">
+    <form action="./api/edit_sub.php?do=<?= $do; ?>&parent=<?= $parent; ?>" method="post" enctype="multipart/form-data">
+        <table class="w80 mg" id="mytb">
 
-        <tr>
-            <td><?= $str->atd[0]; ?></td>
-            <td><?= $str->atd[1]; ?></td>
-            <td>刪除</td>
-        </tr>
-        <?php
-        $dataall=$$do->all(['parent'=>$parent]);
-        foreach ($dataall as $key => $data) {
-        ?>
-        <tr>
-            <td>
-                <input type='text' name='text[]' value='<?=$data['text'];?>'>
-            </td>
-            <td>
-                <input type='text' name='href[]' value='<?=$data['href'];?>'>
-            </td>
-            <td>
-                <input type="checkbox" name="del[]" value="<?=$data['id'];?>">
-            </td>
-        </tr>
-        <input type="hidden" name="id[]" value="<?=$data['id'];?>">
-        <?php
-        }
-        ?>
-        
-    </table>
-    <div class="cent">
-        <input type="submit" value="修改確定"><input type="reset" value="重置"><input type="button" value="更多次選單" onclick="add()">
-    </div>
-</form>
+            <tr>
+                <td><?= $str->atd[0]; ?></td>
+                <td><?= $str->atd[1]; ?></td>
+                <td>刪除</td>
 
+            </tr>
 
+            <?php
+            foreach ($subs as $key => $sub) {
+            ?>
+                <tr>
+                    <td>
+                        <input type="text" name="text[]" value="<?=$sub['text'];?>">
+                    </td>
+                    <td>
+                        <input type="text" name="href[]" value="<?=$sub['href'];?>">
+                    </td>
+                    <td>
+                        <input type="checkbox" name="del[]" value="<?=$sub['id'];?>">
+                    </td>
+                    <input type="hidden" name="id[]" value="<?=$sub['id'];?>">
+                </tr>
+            <?php
+            }
+            ?>
+
+        </table>
+        <div class="cent">
+            <input type="submit" value="修改確定">
+            <input type="reset" value="重置">
+            <button type="button" onclick="add()">更多次選單</button>
+        </div>
+    </form>
+</div>
 <script>
-function add(){
-    $('#mytb').append("<tr><td><input type='text' name='text2[]'></td><td><input type='text' name='href2[]'></td></tr>");
-}
+    function add(){
+        $('#mytb').append(`
+        <tr>
+                    <td>
+                        <input type="text" name="text2[]" >
+                    </td>
+                    <td>
+                        <input type="text" name="href2[]" >
+                    </td>
 
+                </tr>
+        `)
+    }
 </script>

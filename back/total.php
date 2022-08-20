@@ -4,30 +4,34 @@
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="lo(&#39;./api/logout.php&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
             </tr>
         </tbody>
     </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli"><?=$str->hd;?></p>
-        <form method="post" action="./api/update.php?do=<?=$do;?>">
-            <table width="100%">
+        <form method="post"  action="./api/update.php?do=<?=$do;?>">
+            <table class="w50 mg">
                 <tbody>
+                    <?php
+                        $data=$$do->find(1);
+                    ?>
                     <tr class="yel">
-                        <td width="50%"><?=$str->td;?></td>
-                        <td ><input type="text" name="<?=$do;?>" value="<?=$$do->find(1)[$do];?>"></td>
+                        <td class="w50"><?=$str->td;?></td>
+                        <td class="w50">
+                            <input type="text" name="<?=$do;?>" value="<?=$data[$do];?>">
+                        </td>
                     </tr>
-                    
+
                 </tbody>
             </table>
-            <table style="margin-top:40px; width:70%;">
+            <table class="w50 mg">
                 <tbody>
                     <tr>
                         <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置"></td>
                     </tr>
                 </tbody>
             </table>
-
         </form>
     </div>
 </div>

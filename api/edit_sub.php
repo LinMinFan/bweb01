@@ -1,37 +1,38 @@
 <?php
-$do=$_GET['do'];
 include "../base.php";
-$parent=$_GET['parent'];
+$do = $_GET['do'];
+$parent = $_GET['parent'];
+
+
+
 
 if (isset($_POST['text2'])) {
-    $data=[];
+    $newsub = [];
     foreach ($_POST['text2'] as $key => $text2) {
-    
-    $data['text']=$text2;
-    $data['href']=$_POST['href2'][$key];
-    $data['parent']=$parent;
-    $data['sh']=0;
-    
-    $$do->save($data);
+        $newsub['text'] = $text2;
+        $newsub['href'] = $_POST['href2'][$key];
+        $newsub['sh'] = 0;
+        $newsub['parent'] = $parent;
+        $$do->save($newsub);
     }
 }
-
-if (isset($_POST['del'])) {
-    $idx=$_POST['id'];
-    foreach ($idx as $id) {
-        if (in_array($id,$_POST['del'])) {
+if (!empty($_POST['id'])) {
+    foreach ($_POST['id'] as $key => $id) {
+        if (isset($_POST['del']) && in_array($id, $_POST['del'])) {
             $$do->del($id);
+        } else {
+            $sub=$$do->find($id);
+            $sub['text'] = $_POST['text'][$key];
+            $sub['href'] = $_POST['href'][$key];
+            $sub['sh'] = 0;
+            $sub['parent'] = $parent;
+            $$do->save($sub);
         }
     }
-}else {
-    $idx=$_POST['id'];
-    foreach ($idx as $key => $id) {
-    $data=$$do->find($id);
-    $data['text']=$_POST['text'][$key];
-    $data['href']=$_POST['href'][$key];
-    $$do->save($data);
-    }
 }
 
-to("../back.php?do=$do");
 
+
+
+
+to("../back.php?do=$do");

@@ -1,7 +1,7 @@
 ﻿<?php
 $do=$_GET['do']??"title";
 include "./base.php";
-$str=new str($do);
+$str = new str($do);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0068)?do=admin&redo=title -->
@@ -22,7 +22,7 @@ $str=new str($do);
 </div>
 	<div id="main">
 	<?php
-		include "./header.php";
+			include "./header.php";
 		?>
         	<div id="ms">
              	<div id="lf" style="float:left;">
@@ -43,7 +43,7 @@ $str=new str($do);
                             </a>
 							                            <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
                             	<div class="mainmu">
-                    			校園映像資料管理                    			</div>
+                    			校園映象資料管理                    			</div>
                             </a>
 										    <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
                             	<div class="mainmu">
@@ -70,15 +70,15 @@ $str=new str($do);
 							                    </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-						<?=$total->find(1)['total'];?>
-					</span>
+                        <?=$total->find(1)['total'];?>
+						</span>
                     </div>
         		</div>
                 <?php
 				$file="./back/$do.php";
 				if (file_exists($file)) {
 					include $file;
-				}else {
+				}else{
 					include "./back/title.php";
 				}
 				?>
@@ -101,7 +101,7 @@ $str=new str($do);
                              </div>
              	<div style="clear:both;"></div>
 				 <?php
-				include "./footer.php";
+					include "./footer.php";
 				?>
     </div>
 
