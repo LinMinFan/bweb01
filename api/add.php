@@ -1,46 +1,41 @@
 <?php
 include "../base.php";
-$do = $_GET['do'];
 
+if (!empty($_FILES['img'])) {
+    $_POST['img']=$_FILES['img']['name'];
+    move_uploaded_file($_FILES['img']['tmp_name'],"../img/{$_POST['img']}");
+    switch ($_GET['do']) {
+        case 'title':
+            $_POST['sh']=0;
+            break;
+        case 'mvim':
+        case 'image':
+            $_POST['sh']=1;
+            break;
+        
+        default:
 
+            break;
+    }
+}else{
+    switch ($_GET['do']) {
+        case 'ad':
+        case 'news':
+            $_POST['sh']=1;
+            break;
+        case 'admin':
+            unset($_POST['pw2']);
+            break;
+        case 'menu':
+            $_POST['parent']=0;
+            $_POST['sh']=1;
+            break;
+        
+        default:
 
-switch ($do) {
-    case 'title':
-        $name = $_FILES['img']['name'];
-        move_uploaded_file($_FILES['img']['tmp_name'], "../img/$name");
-        $data['img'] = $name;
-        $data['text'] = $_POST['text'];
-        $data['sh'] = 0;
-        break;
-    case 'mvim':
-    case 'image':
-        $name = $_FILES['img']['name'];
-        move_uploaded_file($_FILES['img']['tmp_name'], "../img/$name");
-        $data['img'] = $name;
-        $data['sh'] = 1;
-        break;
-    case 'ad':
-    case 'news':
-        $data['text'] = $_POST['text'];
-        $data['sh'] = 1;
-    case 'menu':
-        $data['text'] = $_POST['text'];
-        $data['href'] = $_POST['href'];
-        $data['sh'] = 1;
-        $data['parent'] = 0;
-        break;
-    case 'admin':
-        $data['acc'] = $_POST['acc'];
-        $data['pw'] = $_POST['pw'];
-        break;
-
-    default:
-        # code...
-        break;
+            break;
+    }
 }
-$$do->save($data);
-
-
-
-
-to("../back.php?do=$do");
+${$_GET['do']}->save($_POST);
+to("../back.php?do={$_GET['do']}");
+?>

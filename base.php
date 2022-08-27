@@ -120,7 +120,7 @@ class str{
                 $this->atd=['標題區圖片:','標題區替代文字:'];
                 $this->ubtn="更新圖片";
                 $this->uhd="更新圖片:";
-                $this->utd="圖片";
+                $this->utd="圖片:";
                 break;
             case 'ad':
                 $this->hd="動態文字廣告管理";

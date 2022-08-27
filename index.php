@@ -2,7 +2,6 @@
 $do=$_GET['do']??"main";
 include "./base.php";
 ?>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0040)http://127.0.0.1/test/exercise/collage/? -->
 <html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -11,6 +10,16 @@ include "./base.php";
 <link href="./css/css.css" rel="stylesheet" type="text/css">
 <script src="./js/jquery-1.9.1.min.js"></script>
 <script src="./js/js.js"></script>
+<style>
+	.blo{
+		width: 180px;
+		height: 30px;
+		top: 15px;
+		left: 100px;
+		z-index: 99;
+	}
+
+</style>
 </head>
 
 <body>
@@ -22,86 +31,76 @@ include "./base.php";
 </div>
 	<div id="main">
 		<?php
-			include "./header.php";
+		include "./header.php";
 		?>
         	<div id="ms">
              	<div id="lf" style="float:left;">
             		<div id="menuput" class="dbor">
                     <!--主選單放此-->
-                    	<span class="t botli">主選單區</span>
-						<?php
-							$mus=$menu->all(['parent'=>0,'sh'=>1]);
-							foreach ($mus as $key => $mu) {
-								$subs=$menu->all(['parent'=>$mu['id']]);
+                    <span class="t botli">主選單區</span>
+					<?php
+					$mus=$menu->all(['parent'=>0]);
+					foreach ($mus as $key => $mu) {
+						?>
+						<div class="mainmu pos_r">
+							<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
+							<?php
+							$subs=$menu->all(['parent'=>$mu['id']]);
+							foreach ($subs as $key => $sub) {
 								?>
-									<div class="mainmu">
-										<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
-										<?php
-											foreach ($subs as $key => $sub) {
-												?>
-													<div class="mw">
-														<a class="mainmu2" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
-													</div>
-												<?php
-											}
-										?>
-									</div>
+								<div class="mw" style="display:none;">
+								<a class="mainmu2 pos_a blo" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>	
+								</div>
 								<?php
 							}
-						?>
-                    </div>
+							?>
+						</div>
+						<?php
+					}
+					?>
+                </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-							<?=$total->find(1)['total'];?>
+                        	<?=$total->find(1)['total'];?>
 						</span>
                     </div>
         		</div>
-                <?php
-				$file="./front/$do.php";
-				if (file_exists($file)) {
-					include $file;
-				}else{
-					include "./front/main.php";
-				}
+				<?php
+					$file="./front/$do.php";
+					if (file_exists($file)) {
+						include $file;
+					}else {
+						include "./fornt/main.php";
+					}
 				?>
-                <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
-                    	<script>
-						$(".sswww").hover(
-							function ()
-							{
-								$("#alt").html(""+$(this).children(".all").html()+"").css({"top":$(this).offset().top-50})
-								$("#alt").show()
-							}
-						)
-						$(".sswww").mouseout(
-							function()
-							{
-								$("#alt").hide()
-							}
-						)
-                        </script>
-                                 <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
+                
+                <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
                 	<!--右邊-->   
                 	<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
                 	<div style="width:89%; height:480px;" class="dbor">
                     	<span class="t botli">校園映象區</span>
 						<div class="cent">
-							<div onclick="pp(1)"><img src="./icon/up.jpg"></div>
 							<div>
-								<?php
-									$shimgs=$image->all($sh);
-									$counts=$image->math('count','id',$sh);
-									foreach ($shimgs as $key => $shimg) {
-										?>
-											<img class="im" id="ssaa<?=$key;?>" src="./img/<?=$shimg['img'];?>" width="150px;" height="103px">
-										<?php
-									}
-								?>
+								<img src="./icon/up.jpg" onclick="pp(1)">
 							</div>
-							<div onclick="pp(2)"><img src="./icon/dn.jpg"></div>
+							<?php
+							foreach ($image->all($sh) as $key => $img) {
+								?>
+								<div class="im" id="ssaa<?=$key;?>">
+									<img src="./img/<?=$img['img'];?>" width="150px" height="103px">
+								</div>
+								<?php
+							}
+							?>
+							<div>
+								<img src="./icon/dn.jpg" onclick="pp(2)">
+							</div>
 						</div>
-						    <script>
-                        	var nowpage=0,num=<?=$counts;?>;
+					<script>
+						<?php
+						$countI=$image->math('count','id',$sh);
+						?>
+                        	var nowpage=0,num=<?=$countI;?>;
 							function pp(x)
 							{
 								var s,t;
@@ -123,7 +122,7 @@ include "./base.php";
                             </div>
              	<div style="clear:both;"></div>
             	<?php
-					include "./footer.php";
+				include "./footer.php";
 				?>
     </div>
 

@@ -4,13 +4,13 @@
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
             </tr>
         </tbody>
     </table>
     <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli"><?=$str->hd;?></p>
-        <form method="post"  action="./api/edit.php?do=<?=$do;?>">
+        <form method="post" action="./api/edit.php?do=<?=$do;?>">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
@@ -22,36 +22,29 @@
                         <td></td>
                     </tr>
                     <?php
-                        $datas=$$do->all(['parent'=>0]);
-                        foreach ($datas as $key => $data) {
-                            ?>
-                                <tr>
-
-                                    <td>
-                                        <input type="text" name="text[]" value="<?=$data['text'];?>">
-                                    </td>
-                                    <td>
-                                        <input type="text" name="href[]" value="<?=$data['href'];?>"    >
-                                    </td>
-                                    <td class="cent">
-                                        <?php
-                                           echo $$do->math('count','id',['parent'=>$data['id']]); 
-                                        ?>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>>
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" name="del[]" value="<?=$data['id'];?>">
-                                    </td>
-                                    <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/edit_sub.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
-
-                                    <input type="hidden" name="id[]" value="<?=$data['id'];?>">
-                                </tr>
-                            <?php
-                        }
+                    foreach ($$do->all(['parent'=>0]) as $key => $data) {
+                        ?>
+                        <tr>
+                            <td class="w30">
+                                <input type="text" name="text[]" value="<?=$data['text'];?>">
+                            </td>
+                            <td class="w30">
+                                <input type="text" name="href[]" value="<?=$data['href'];?>">
+                            </td>
+                            <td class="10">
+                                <?=$$do->math('count','id',['parent'=>$data['id']]);?>
+                            </td>
+                            <td class="w5">
+                                <input type="checkbox" name="sh[]" <?=($data['sh']==1)?"checked":"";?> value="<?=$data['id'];?>">
+                            </td>
+                            <td class="w5">
+                                <input type="checkbox" name="del[]" value="<?=$data['id'];?>">
+                            </td>
+                            <input type="hidden" name="id[]" value="<?=$data['id'];?>">
+                            <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/edit_sub.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                        <?php
+                    }
                     ?>
-
                 </tbody>
             </table>
             <table style="margin-top:40px; width:70%;">
