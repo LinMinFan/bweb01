@@ -1,5 +1,5 @@
 <?php
-$do=$_GET['do'];
+$do=$_GET['do']??"title";
 include "../base.php";
 $str=new str($do);
 ?>
@@ -10,12 +10,12 @@ $str=new str($do);
     <tr>
         <td><?=$str->atd;?></td>
         <td>
-            <input type="file" name="img">
+            <input type="text" name="text" id="">
         </td>
     </tr>
 </table>
 <div class="cent">
-<input type="submit" value="新增">
-<input type="reset" value="重置">
+    <input type="submit" value="新增">
+    <input type="reset" value="重置">
 </div>
 </form>

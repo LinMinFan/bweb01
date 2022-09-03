@@ -4,7 +4,7 @@
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='./api/logout.php'">管理登出</button></td>
             </tr>
         </tbody>
     </table>
@@ -14,31 +14,32 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td class="w80"><?=$str->td;?></td>
+                        <td class="w70"><?=$str->td;?></td>
                         <td class="w10">顯示</td>
                         <td class="w10">刪除</td>
                     </tr>
                     <?php
-                    $p = $_GET['p'] ?? 1;
-                    $count = $$do->math('count', 'id');
-                    $div = 4;
-                    $pages = ceil($count / $div);
-                    $start = ($p - 1) * $div;
-                    $pre = (($p - 1) > 0) ? ($p - 1) : 1;
-                    $next = (($p + 1) <= $pages) ? ($p + 1) : $pages;
+                    $countN=$news->math('count','id');
+                    $p=$_GET['p']??1;
+                    $div=4;
+                    $pages=ceil($countN/$div);
+                    $start=($p-1)*$div;
+                    $pre=($p-1>0)?$p-1:1;
+                    $next=($p+1<=$pages)?$p+1:$pages;
                     foreach ($$do->all(" limit $start,$div") as $key => $data) {
                         ?>
                         <tr>
-                            <td class="w80">
-                                <textarea name="text[]" style="width:400px;height:50px;"><?=$data['text'];?></textarea>
+                            <td>
+                                <textarea name="text[]" style="width:350px;height:50px;"><?=$data['text'];?></textarea>
                             </td>
-                            <td class="w10">
-                                <input type="checkbox" name="sh[]" <?=($data['sh']==1)?"checked":"";?> value="<?=$data['id'];?>">
+                            <td>
+                                <input type="checkbox" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>>
                             </td>
-                            <td class="w10">
+                            <td>
                                 <input type="checkbox" name="del[]" value="<?=$data['id'];?>">
                             </td>
                             <input type="hidden" name="id[]" value="<?=$data['id'];?>">
+                        </tr>
                         <?php
                     }
                     ?>
@@ -49,7 +50,7 @@
         <?php
         for ($i=1; $i <= $pages ; $i++) { 
             ?>
-            <a class="bl" href="?do=<?=$do;?>&p=<?=$i;?>" <?=($i==$p)?"style='font-size:20px;'":"";?>><?=$i;?></a>
+        <a href="?do=<?=$do;?>&p=<?=$i;?>"<?=($i==$p)?"class='bl fs24'":"class='bl'";?>><?=$i;?></a>
             <?php
         }
         ?>
@@ -58,7 +59,7 @@
             <table style="margin-top:40px; width:70%;">
                 <tbody>
                     <tr>
-                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/<?=$do;?>.php?do=<?=$do;?>&#39;)" value="<?=$str->abtn;?>"></td>
+                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./model/<?=$do;?>.php?do=<?=$do;?>&#39;)" value="<?=$str->abtn;?>"></td>
                         <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置"></td>
                     </tr>
                 </tbody>

@@ -1,5 +1,5 @@
 <?php
-$do=$_GET['do'];
+$do=$_GET['do']??"title";
 include "../base.php";
 $str=new str($do);
 ?>
@@ -7,16 +7,15 @@ $str=new str($do);
 <hr>
 <form action="./api/add.php?do=<?=$do;?>" method="post" enctype="multipart/form-data">
 <table class="w60 mg">
-
     <tr>
         <td><?=$str->atd;?></td>
         <td>
-            <textarea name="text"></textarea>
+            <input type="file" name="img" id="">
         </td>
     </tr>
 </table>
 <div class="cent">
-<input type="submit" value="新增">
-<input type="reset" value="重置">
+    <input type="submit" value="新增">
+    <input type="reset" value="重置">
 </div>
 </form>

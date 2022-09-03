@@ -1,37 +1,36 @@
 <div class="di" style="height:540px; border:#999 1px solid; width:53.2%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
-    <?php
+<?php
     include "./marquee.php";
     ?>
     <div style="height:32px; display:block;"></div>
     <!--正中央-->
     <?php
-    $p = $_GET['p'] ?? 1;
-    $countN = $news->math('count', 'id', $sh);
-    $div = 5;
-    $pages = ceil($countN / $div);
-    $start = ($p - 1) * $div;
-    $pre = (($p - 1) > 0) ? ($p - 1) : 1;
-    $next = (($p + 1) <= $pages) ? ($p + 1) : $pages;
-    $nns = $news->all($sh, " limit $start,$div");
+    $countN=$news->math('count','id',$sh);
+    $p=$_GET['p']??1;
+    $div=5;
+    $pages=ceil($countN/$div);
+    $start=($p-1)*$div;
+    $pre=($p-1>0)?$p-1:1;
+    $next=($p+1<=$pages)?$p+1:$pages;
     ?>
-    <ol start="<?=$start+1;?>">
+    <ol start=<?=$start+1;?>>
     <?php
-        foreach ($nns as $key => $nn) {
+    foreach ($news->all($sh," limit $start,$div") as $key => $nn){
         ?>
-        <li class="sswww">
-            <span><?=mb_substr($nn['text'],0,20);?>...</span>
-            <span style="display:none;" class="all"><?=$nn['text'];?></span>
-        </li>
-        <?php
-        }
-    ?>
+                <li class="sswww">
+                    <span><?=mb_substr($nn['text'],0,20);?>...</span>
+                    <span class="all dpn"><?=$nn['text'];?></span>
+                </li>
+                <?php
+            }
+        ?>
     </ol>
     <div style="text-align:center;">
         <a class="bl" href="?do=news&p=<?=$pre;?>"><</a>
         <?php
         for ($i=1; $i <= $pages ; $i++) { 
             ?>
-            <a class="bl" href="?do=news&p=<?=$i;?>" <?=($i==$p)?"style='font-size:20px;'":"";?>><?=$i;?></a>
+        <a href="?do=news&p=<?=$i;?>"<?=($i==$p)?"class='bl fs24'":"class='bl'";?>><?=$i;?></a>
             <?php
         }
         ?>

@@ -159,14 +159,20 @@ input:focus,button:focus
 	cursor:pointer;
 	text-decoration:none;
 }
-.pos_r{
-	position: relative;
+.mg{
+	margin: 0 auto;
 }
-.pos_a{
-	position: absolute;
+.float_l{
+	float: left;
 }
 .float_r{
 	float: right;
+}
+.dpn{
+	display: none;
+}
+.fs24{
+	font-size: 24px;
 }
 .w5{
 	width: 5%;
@@ -192,9 +198,6 @@ input:focus,button:focus
 .w40{
 	width: 40%;
 }
-.w45{
-	width: 45%;
-}
 .w50{
 	width: 50%;
 }
@@ -213,6 +216,6 @@ input:focus,button:focus
 .w100{
 	width: 100%;
 }
-.mg{
-	margin: 0 auto;
+.w5{
+	width: 5%;
 }

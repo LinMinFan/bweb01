@@ -1,11 +1,14 @@
 <?php
 include "../base.php";
+$do=$_GET['do'];
 
 if (!empty($_FILES['img'])) {
-    $data=${$_GET['do']}->find($_GET['id']);
-    $data['img']=$_FILES['img']['name'];
-    move_uploaded_file($_FILES['img']['tmp_name'],"../img/{$data['img']}");
+  $_POST['img']=$_FILES['img']['name'];
+  move_uploaded_file($_FILES['img']['tmp_name'],"../img/{$_POST['img']}");
+  
+  $$do->save($_POST);
 }
-${$_GET['do']}->save($data);
-to("../back.php?do={$_GET['do']}");
-?>
+
+
+
+to("../back.php?do={$do}");

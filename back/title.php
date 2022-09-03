@@ -4,7 +4,7 @@
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button onclick="document.cookie=&#39;user=&#39;;location.replace(&#39;?&#39;)" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
+                <td><button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='./api/logout.php'">管理登出</button></td>
             </tr>
         </tbody>
     </table>
@@ -15,10 +15,10 @@
                 <tbody>
                     <tr class="yel">
                         <td class="w40"><?=$str->td[0];?></td>
-                        <td class="w40"><?=$str->td[1];?></td>
-                        <td class="w10">顯示</td>
-                        <td class="w10">刪除</td>
-                        <td></td>
+                        <td class="w30"><?=$str->td[1];?></td>
+                        <td class="w5">顯示</td>
+                        <td class="w5">刪除</td>
+                        <td class=""></td>
                     </tr>
                     <?php
                     foreach ($$do->all() as $key => $data) {
@@ -27,17 +27,18 @@
                             <td class="w40">
                                 <img src="./img/<?=$data['img'];?>" width="300px" height="30px">
                             </td>
-                            <td class="w40">
+                            <td class="w30">
                                 <input type="text" name="text[]" value="<?=$data['text'];?>">
                             </td>
-                            <td class="w10">
-                                <input type="radio" name="sh[]" <?=($data['sh']==1)?"checked":"";?> value="<?=$data['id'];?>">
+                            <td class="w5">
+                                <input type="radio" name="sh[]" value="<?=$data['id'];?>" <?=($data['sh']==1)?"checked":"";?>>
                             </td>
-                            <td class="w10">
+                            <td class="w5">
                                 <input type="checkbox" name="del[]" value="<?=$data['id'];?>">
                             </td>
                             <input type="hidden" name="id[]" value="<?=$data['id'];?>">
-                            <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/upload.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                            <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./model/upload.php?do=<?=$do;?>&id=<?=$data['id'];?>&#39;)" value="<?=$str->ubtn;?>"></td>
+                        </tr>
                         <?php
                     }
                     ?>
@@ -46,7 +47,7 @@
             <table style="margin-top:40px; width:70%;">
                 <tbody>
                     <tr>
-                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./modal/<?=$do;?>.php?do=<?=$do;?>&#39;)" value="<?=$str->abtn;?>"></td>
+                        <td width="200px"><input type="button" onclick="op(&#39;#cover&#39;,&#39;#cvr&#39;,&#39;./model/<?=$do;?>.php?do=<?=$do;?>&#39;)" value="<?=$str->abtn;?>"></td>
                         <td class="cent"><input type="submit" value="修改確定"><input type="reset" value="重置"></td>
                     </tr>
                 </tbody>

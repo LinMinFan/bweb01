@@ -1,5 +1,5 @@
 <?php
-$do=$_GET['do'];
+$do=$_GET['do']??"title";
 include "../base.php";
 $str=new str($do);
 ?>
@@ -10,18 +10,24 @@ $str=new str($do);
     <tr>
         <td><?=$str->atd[0];?></td>
         <td>
-            <input type="file" name="img">
+            <input type="text" name="acc" id="">
         </td>
     </tr>
     <tr>
         <td><?=$str->atd[1];?></td>
         <td>
-            <input type="text" name="text">
+            <input type="password" name="pw" id="">
+        </td>
+    </tr>
+    <tr>
+        <td><?=$str->atd[2];?></td>
+        <td>
+            <input type="password" name="pw2" id="">
         </td>
     </tr>
 </table>
 <div class="cent">
-<input type="submit" value="新增">
-<input type="reset" value="重置">
+    <input type="submit" value="新增">
+    <input type="reset" value="重置">
 </div>
 </form>

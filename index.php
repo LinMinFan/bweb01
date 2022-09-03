@@ -11,17 +11,16 @@ include "./base.php";
 <script src="./js/jquery-1.9.1.min.js"></script>
 <script src="./js/js.js"></script>
 <style>
-	.blo{
+	.m_sub{
+		display: block;
 		width: 180px;
 		height: 30px;
-		top: 15px;
-		left: 100px;
-		z-index: 99;
+		top: -10px;
+		left: 90px;
+		z-index: 10;
 	}
-
 </style>
 </head>
-
 <body>
 <div id="cover" style="display:none; ">
 	<div id="coverr">
@@ -39,18 +38,16 @@ include "./base.php";
                     <!--主選單放此-->
                     <span class="t botli">主選單區</span>
 					<?php
-					$mus=$menu->all(['parent'=>0]);
-					foreach ($mus as $key => $mu) {
+					foreach ($menu->all($sh," && `parent`=0") as $key => $mm) {
 						?>
-						<div class="mainmu pos_r">
-							<a href="<?=$mu['href'];?>"><?=$mu['text'];?></a>
+						<div class="mainmu">
+							<a href="<?=$mm['href'];?>"><?=$mm['text'];?></a>
 							<?php
-							$subs=$menu->all(['parent'=>$mu['id']]);
-							foreach ($subs as $key => $sub) {
+							foreach ($menu->all(['parent'=>$mm['id']]) as $key => $sub) {
 								?>
-								<div class="mw" style="display:none;">
-								<a class="mainmu2 pos_a blo" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>	
-								</div>
+									<div class="mw dpn">
+										<a class="mainmu2 m_sub" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
+									</div>
 								<?php
 							}
 							?>
@@ -58,49 +55,64 @@ include "./base.php";
 						<?php
 					}
 					?>
-                </div>
+                    </div>
                     <div class="dbor" style="margin:3px; width:95%; height:20%; line-height:100px;">
                     	<span class="t">進站總人數 : 
-                        	<?=$total->find(1)['total'];?>
-						</span>
+                        	<?=$total->find(1)['total'];?>                        </span>
                     </div>
         		</div>
-				<?php
-					$file="./front/$do.php";
-					if (file_exists($file)) {
-						include $file;
-					}else {
-						include "./fornt/main.php";
-					}
+                <?php
+				$file="./front/$do.php";
+				if (file_exists($file)) {
+					include $file;
+				}else {
+					include "./front/main.php";
+				}
 				?>
-                
-                <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
-                	<!--右邊-->   
-                	<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="lo(&#39;?do=login&#39;)">管理登入</button>
+                <div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
+                    	<script>
+						$(".sswww").hover(
+							function ()
+							{
+								$("#alt").html(""+$(this).children(".all").html()+"").css({"top":$(this).offset().top-50})
+								$("#alt").show()
+							}
+						)
+						$(".sswww").mouseout(
+							function()
+							{
+								$("#alt").hide()
+							}
+						)
+                        </script>
+                                 <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
+                	<!--右邊--> 
+					<?php
+					if (isset($_SESSION['acc'])) {
+						?>
+                		<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='./api/logout.php'">管理登出</button>
+						<?php
+					}else{
+						?>
+                		<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='?do=login'">管理登入</button>
+						<?php
+					}
+					?>
                 	<div style="width:89%; height:480px;" class="dbor">
                     	<span class="t botli">校園映象區</span>
 						<div class="cent">
-							<div>
-								<img src="./icon/up.jpg" onclick="pp(1)">
-							</div>
+							<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
 							<?php
-							foreach ($image->all($sh) as $key => $img) {
+							foreach ($image->all($sh) as $key => $ig) {
 								?>
-								<div class="im" id="ssaa<?=$key;?>">
-									<img src="./img/<?=$img['img'];?>" width="150px" height="103px">
-								</div>
+								<div class="im" id="ssaa<?=$key;?>"><img src="./img/<?=$ig['img'];?>" width="150px" height="103px"></div>
 								<?php
 							}
 							?>
-							<div>
-								<img src="./icon/dn.jpg" onclick="pp(2)">
-							</div>
+							<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
 						</div>
-					<script>
-						<?php
-						$countI=$image->math('count','id',$sh);
-						?>
-                        	var nowpage=0,num=<?=$countI;?>;
+						    <script>
+                        	var nowpage=0,num=<?=$image->math('count','id',$sh);?>;
 							function pp(x)
 							{
 								var s,t;

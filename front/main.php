@@ -12,12 +12,11 @@
     <script>
         var lin = new Array();
         <?php
-           $mvs=$mvim->all($sh);
-           foreach ($mvs as $key => $mv) {
-            ?>
-                lin.push("./img/<?=$mv['img'];?>")
-            <?php
-           } 
+            foreach ($mvim->all($sh) as $key => $mv) {
+                ?>
+                lin.push("./img/<?=$mv['img'];?>");
+                <?php
+            }
         ?>
         var now = 0;
         ww();
@@ -36,28 +35,19 @@
     </script>
     
     <div style="width:95%; padding:2px; height:190px; margin-top:10px; padding:5px 10px 5px 10px; border:#0C3 dashed 3px; position:relative;">
-        <span class="t botli">最新消息區
-            <?php
-            $countN=$news->math('count','id',$sh);
-            if ($countN>5) {
-                ?>
-                <a href="?do=news" class="float_r bl">More...</a>
-                <?php
-            }
-            $nns=$news->all($sh," limit 0,5");
-            ?>
+        <span class="t botli">最新消息區<?=($news->math('count','id',$sh)>5)?"<a class='bl float_r' href='?do=news'>More...</a>":"";?>
         </span>
         <ul class="ssaa" style="list-style-type:decimal;">
-            <?php
-            foreach ($nns as $key => $nn) {
+        <?php
+            foreach ($news->all($sh," limit 0,5") as $key => $nn) {
                 ?>
                 <li>
                     <span><?=mb_substr($nn['text'],0,20);?>...</span>
-                    <span style="display:none;" class="all"><?=$nn['text'];?></span>
+                    <span class="all dpn"><?=$nn['text'];?></span>
                 </li>
                 <?php
             }
-            ?>
+        ?>
         </ul>
         <div id="altt" style="position: absolute; width: 350px; min-height: 100px; background-color: rgb(255, 255, 204); top: 50px; left: 130px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
         <script>
@@ -75,19 +65,3 @@
         </script>
     </div>
 </div>
-<div id="alt" style="position: absolute; width: 350px; min-height: 100px; word-break:break-all; text-align:justify;  background-color: rgb(255, 255, 204); top: 50px; left: 400px; z-index: 99; display: none; padding: 5px; border: 3px double rgb(255, 153, 0); background-position: initial initial; background-repeat: initial initial;"></div>
-<script>
-    $(".sswww").hover(
-        function() {
-            $("#alt").html("" + $(this).children(".all").html() + "").css({
-                "top": $(this).offset().top - 50
-            })
-            $("#alt").show()
-        }
-    )
-    $(".sswww").mouseout(
-        function() {
-            $("#alt").hide()
-        }
-    )
-</script>

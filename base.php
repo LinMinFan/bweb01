@@ -228,9 +228,6 @@ $image=new db('image');
 $news=new db('news');
 $admin=new db('admin');
 $menu=new db('menu');
-
-
-
 $sh=['sh'=>1];
 
 if (!isset($_SESSION['log'])) {
@@ -239,6 +236,4 @@ if (!isset($_SESSION['log'])) {
     $total->save($log);
     $_SESSION['log']=1;
 }
-
-
 ?>
