@@ -8,19 +8,20 @@ include "./base.php";
 
 <title>卓越科技大學校園資訊系統</title>
 <link href="./css/css.css" rel="stylesheet" type="text/css">
+<link href="./css/style.css" rel="stylesheet" type="text/css">
 <script src="./js/jquery-1.9.1.min.js"></script>
 <script src="./js/js.js"></script>
+<script src="./js/main.js"></script>
 <style>
-	.m_sub{
-		display: block;
-		width: 180px;
+	.chd{
+		width: 200px;
 		height: 30px;
-		top: -10px;
-		left: 90px;
+		left: 100px;
 		z-index: 10;
 	}
 </style>
 </head>
+
 <body>
 <div id="cover" style="display:none; ">
 	<div id="coverr">
@@ -29,30 +30,28 @@ include "./base.php";
     </div>
 </div>
 	<div id="main">
-		<?php
-		include "./header.php";
-		?>
+    	<a title="<?=$title->find($sh)['text'];?>" href="./index.php"><div class="ti" style="background:url(&#39;./img/<?=$title->find($sh)['img'];?>&#39;); background-size:cover;"></div><!--標題--></a>
         	<div id="ms">
              	<div id="lf" style="float:left;">
             		<div id="menuput" class="dbor">
                     <!--主選單放此-->
                     <span class="t botli">主選單區</span>
 					<?php
-					foreach ($menu->all($sh," && `parent`=0") as $key => $mm) {
-						?>
-						<div class="mainmu">
-							<a href="<?=$mm['href'];?>"><?=$mm['text'];?></a>
-							<?php
-							foreach ($menu->all(['parent'=>$mm['id']]) as $key => $sub) {
-								?>
-									<div class="mw dpn">
-										<a class="mainmu2 m_sub" href="<?=$sub['href'];?>"><?=$sub['text'];?></a>
-									</div>
-								<?php
-							}
-							?>
-						</div>
+					foreach ($menu->all($sh," && `parent`=0") as $key => $main) {
+					?>
+					<div class="mainmu">
+						<a href="<?=$main['href'];?>"><?=$main['text'];?></a>
 						<?php
+						foreach ($menu->all(['parent'=>$main['id']]) as $key => $chd) {
+							?>
+							<div class="dpn mw pos_r">
+								<a class="pos_r mainmu2 chd blo" href="<?=$chd['href'];?>"><?=$chd['text'];?></a>
+							</div>
+							<?php
+						}
+						?>
+					</div>
+					<?php
 					}
 					?>
                     </div>
@@ -65,7 +64,7 @@ include "./base.php";
 				$file="./front/$do.php";
 				if (file_exists($file)) {
 					include $file;
-				}else {
+				}else{
 					include "./front/main.php";
 				}
 				?>
@@ -86,31 +85,35 @@ include "./base.php";
 						)
                         </script>
                                  <div class="di di ad" style="height:540px; width:23%; padding:0px; margin-left:22px; float:left; ">
-                	<!--右邊--> 
+                	<!--右邊-->
 					<?php
 					if (isset($_SESSION['acc'])) {
-						?>
-                		<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='./api/logout.php'">管理登出</button>
-						<?php
+					?>
+					<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="bb('title')">返回管理</button>
+					<?php
 					}else{
-						?>
-                		<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='?do=login'">管理登入</button>
-						<?php
+					?>
+					<button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="ff('login')">管理登入</button>
+					<?php
 					}
 					?>
                 	<div style="width:89%; height:480px;" class="dbor">
                     	<span class="t botli">校園映象區</span>
-						<div class="cent">
-							<div><img src="./icon/up.jpg" onclick="pp(1)"></div>
-							<?php
-							foreach ($image->all($sh) as $key => $ig) {
-								?>
-								<div class="im" id="ssaa<?=$key;?>"><img src="./img/<?=$ig['img'];?>" width="150px" height="103px"></div>
-								<?php
-							}
-							?>
-							<div><img src="./icon/dn.jpg" onclick="pp(2)"></div>
-						</div>
+							<div class="cent">
+								<div class="" onclick="pp(1)"><img src="./img/up.jpg" alt=""></div>
+								
+									<?php
+									foreach ($image->all($sh) as $key => $ii) {
+										?>
+										<div class="im" id="ssaa<?=$key;?>">
+										<img src="./img/<?=$ii['img'];?>" width="150px" height="103px">
+										</div>
+										<?php
+									}
+									?>
+								
+								<div class="" onclick="pp(2)"><img src="./img/dn.jpg" alt=""></div>
+							</div>
 						    <script>
                         	var nowpage=0,num=<?=$image->math('count','id',$sh);?>;
 							function pp(x)
@@ -133,9 +136,11 @@ include "./base.php";
                 </div>
                             </div>
              	<div style="clear:both;"></div>
-            	<?php
-				include "./footer.php";
-				?>
+            	<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
+                <span class="t" style="line-height:123px;">
+				<?=$bottom->find(1)['bottom'];?>	
+				</span>
+                </div>
     </div>
 
 </body></html>

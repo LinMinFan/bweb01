@@ -1,10 +1,12 @@
+<?php
+?>
 <div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
     <table width="100%">
         <tbody>
             <tr>
                 <td style="width:70%;font-weight:800; border:#333 1px solid; border-radius:3px;" class="cent"><a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a></td>
-                <td><button style="width:100%; margin-left:auto; margin-right:auto; margin-top:2px; height:50px;" onclick="location.href='./api/logout.php'">管理登出</button></td>
+                <td><button onclick="location.href='./api/logout.php'" style="width:99%; margin-right:2px; height:50px;">管理登出</button></td>
             </tr>
         </tbody>
     </table>
@@ -14,8 +16,8 @@
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td class="w50"><?=$str->td;?></td>
-                        <td class="w50">
+                        <td class="w45"><?=$str->td;?></td>
+                        <td class="w45">
                             <input type="text" name="<?=$do;?>" value="<?=$$do->find(1)[$do];?>">
                             <input type="hidden" name="id" value="1">
                         </td>

@@ -1,28 +1,28 @@
 <?php
-$do=$_GET['do']??"title";
+$do=$_GET['do'];
 include "../base.php";
-$str=new str($do);
+$str=new Str($do);
 ?>
 <h3 class="cent"><?=$str->ahd;?></h3>
 <hr>
-<form action="./api/add.php?do=<?=$do;?>" method="post" enctype="multipart/form-data">
+<form action="./api/save.php?do=<?=$do;?>" method="post" enctype="multipart/form-data">
 <table class="w60 mg">
     <tr>
         <td><?=$str->atd[0];?></td>
         <td>
-            <input type="text" name="acc" id="">
+        <input type="text" name="acc">
         </td>
     </tr>
     <tr>
         <td><?=$str->atd[1];?></td>
         <td>
-            <input type="password" name="pw" id="">
+        <input type="password" name="pw">
         </td>
     </tr>
     <tr>
         <td><?=$str->atd[2];?></td>
         <td>
-            <input type="password" name="pw2" id="">
+        <input type="password" name="pw2">
         </td>
     </tr>
 </table>

@@ -1,7 +1,8 @@
 <?php
-$do=$_GET['do']??"title";
+$do=$_GET['do'];
+$id=$_GET['id'];
 include "../base.php";
-$str=new str($do);
+$str=new Str($do);
 ?>
 <h3 class="cent"><?=$str->uhd;?></h3>
 <hr>
@@ -10,12 +11,11 @@ $str=new str($do);
     <tr>
         <td><?=$str->utd;?></td>
         <td>
-            <input type="file" name="img" id="">
-            <input type="hidden" name="id" value="<?=$_GET['id'];?>">
+        <input type="file" name="img">
+        <input type="hidden" name="id" value="<?=$id;?>">
         </td>
     </tr>
-
-</table>
+    </table>
 <div class="cent">
     <input type="submit" value="更新">
     <input type="reset" value="重置">

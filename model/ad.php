@@ -1,16 +1,16 @@
 <?php
-$do=$_GET['do']??"title";
+$do=$_GET['do'];
 include "../base.php";
-$str=new str($do);
+$str=new Str($do);
 ?>
 <h3 class="cent"><?=$str->ahd;?></h3>
 <hr>
-<form action="./api/add.php?do=<?=$do;?>" method="post" enctype="multipart/form-data">
+<form action="./api/save.php?do=<?=$do;?>" method="post" enctype="multipart/form-data">
 <table class="w60 mg">
     <tr>
         <td><?=$str->atd;?></td>
         <td>
-            <input type="text" name="text" id="">
+        <input type="text" name="text">
         </td>
     </tr>
 </table>

@@ -1,7 +1,7 @@
 ﻿<?php
 $do=$_GET['do']??"title";
 include "./base.php";
-$str=new str($do);
+$str=new Str($do);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0068)?do=admin&redo=title -->
@@ -9,8 +9,10 @@ $str=new str($do);
 
 <title>卓越科技大學校園資訊系統</title>
 <link href="./css/css.css" rel="stylesheet" type="text/css">
+<link href="./css/style.css" rel="stylesheet" type="text/css">
 <script src="./js/jquery-1.9.1.min.js"></script>
 <script src="./js/js.js"></script>
+<script src="./js/main.js"></script>
 </head>
 
 <body>
@@ -21,14 +23,12 @@ $str=new str($do);
     </div>
 </div>
 	<div id="main">
-	<?php
-		include "./header.php";
-		?>
+	<a title="<?=$title->find($sh)['text'];?>" href="./index.php"><div class="ti" style="background:url(&#39;./img/<?=$title->find($sh)['img'];?>&#39;); background-size:cover;"></div><!--標題--></a>
         	<div id="ms">
              	<div id="lf" style="float:left;">
             		<div id="menuput" class="dbor">
                     <!--主選單放此-->
-                    	                    		<span class="t botli">後台管理選單</span>
+                    	    <span class="t botli">後台管理選單</span>
                 			                            <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=title">
                             	<div class="mainmu">
                     			網站標題管理                    			</div>
@@ -43,7 +43,7 @@ $str=new str($do);
                             </a>
 							                            <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=image">
                             	<div class="mainmu">
-                    			校園映象資料管理                    			</div>
+                    			校園映像資料管理                    			</div>
                             </a>
 										    <a style="color:#000; font-size:13px; text-decoration:none;" href="?do=total">
                             	<div class="mainmu">
@@ -73,11 +73,11 @@ $str=new str($do);
 						<?=$total->find(1)['total'];?>                        </span>
                     </div>
         		</div>
-				<?php
+                <?php
 				$file="./back/$do.php";
 				if (file_exists($file)) {
 					include $file;
-				}else {
+				}else{
 					include "./back/title.php";
 				}
 				?>
@@ -99,9 +99,9 @@ $str=new str($do);
                         </script>
                              </div>
              	<div style="clear:both;"></div>
-				 <?php
-				include "./footer.php";
-				?>
+            	<div style="width:1024px; left:0px; position:relative; background:#FC3; margin-top:4px; height:123px; display:block;">
+                	<span class="t" style="line-height:123px;"><?=$bottom->find(1)['bottom'];?></span>
+                </div>
     </div>
 
 </body></html>
